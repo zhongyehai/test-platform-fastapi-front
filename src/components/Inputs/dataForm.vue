@@ -182,10 +182,10 @@ export default {
     // 选中文件事件, 检验文件是否已存在
     onChange(file) {
       // 检验文件是否已存在
-      fileCheck({ 'fileType': this.fileType, 'name': file.name }).then(response => {
+      fileCheck({ 'file_type': this.fileType, 'file_name': file.name }).then(response => {
         const form = new FormData()
         form.append('file', file.raw)
-        form.append('fileType', this.fileType)
+        form.append('file_type', this.fileType)
 
         if (response.message.indexOf('已存在') !== -1) {
           // 确认是否覆盖已存在文件，不覆盖则不上传

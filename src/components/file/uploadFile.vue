@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { uploadApi, fileCheck, filePost } from '@/apis/assist/file'
+import {uploadApi, fileCheck, filePost, fileUpload} from '@/apis/assist/file'
 
 export default {
   name: 'UploadFile',
@@ -75,7 +75,7 @@ export default {
     // 选中文件事件, 检验文件是否已存在
     onChange(file, fileList) {
       // 检验文件是否已存在
-      fileCheck({ fileType: this.fileType, 'name': file.name }).then(response => {
+      fileCheck({ file_type: this.fileType, file_name: file.name }).then(response => {
         if (response.message.indexOf('已存在') !== -1) {
           // 确认是否继续上传，不上传则从缓存中删除
           this.$confirm(`${response.message}，是否覆盖?`, '提示', {
@@ -106,13 +106,13 @@ export default {
     submitUpload() {
       // 把文件添加到form
       const form = new FormData()
-      form.append('fileType', this.fileType)
+      form.append('file_type', this.fileType)
       this.tempFileList.forEach(file => {
-        form.append('files', file.raw)
+        form.append('file', file.raw)
       })
 
       // 上传form到服务器
-      filePost(form).then((response) => {
+      fileUpload(form).then((response) => {
         this.closeDialog(response)
       }
       )

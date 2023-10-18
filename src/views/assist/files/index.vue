@@ -181,7 +181,7 @@ export default {
     // 下载文件
     downloadFile(row) {
       this.$set(row, 'downloadLoadingIsShow', true)
-      fileDownload({ 'name': row.name, 'fileType': this.fileType }).then(response => {
+      fileDownload({ file_name: row.name, file_type: this.fileType }).then(response => {
         this.$set(row, 'downloadLoadingIsShow', false)
         const blob = new Blob([response], {
           type: 'application/vnd.ms-excel' // 将会被放入到blob中的数组内容的MIME类型
@@ -202,7 +202,7 @@ export default {
     delFile(row) {
       this.$set(row, 'deletePopoverIsShow', false)
       this.$set(row, 'deleteLoadingIsShow', true)
-      fileDelete({ 'name': row.name, 'fileType': this.fileType }).then(response => {
+      fileDelete({ file_name: row.name, file_type: this.fileType }).then(response => {
         this.$set(row, 'deleteLoadingIsShow', false)
         if (this.showMessage(this, response)) {
           this.getFileList()
