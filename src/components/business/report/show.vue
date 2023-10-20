@@ -75,7 +75,6 @@
 
             <!-- Python脚本 -->
             <el-button
-              v-show="reRunReport.run_type !== 'api'"
               type="primary"
               size="mini"
               style="margin-right: 10px"
@@ -608,8 +607,8 @@ export default {
       const runUrl = this.getRunUrl()
 
       runUrl({
-        apis: this.reRunReport.run_type === 'api' ? this.reRunReport.run_id : undefined,
-        caseId: this.reRunReport.run_type === 'case' ? this.reRunReport.run_id : undefined,
+        api_list: this.reRunReport.run_type === 'api' ? this.reRunReport.run_id : undefined,
+        case_id_list: this.reRunReport.run_type === 'case' ? this.reRunReport.run_id : undefined,
         id: ['task', 'suite'].indexOf(this.reRunReport.run_type) !== -1 ? this.reRunReport.run_id : undefined,
         env_list: runConf.runEnv,
         is_async: runConf.runType,
