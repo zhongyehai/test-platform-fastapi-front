@@ -22,3 +22,17 @@ npm run build
 ```
 
 浏览器访问 [http://localhost:8023](http://localhost:8023), 账号admin, 密码123456
+
+## 项目关键截图
+
+#### 选择运行环境
+
+![选择运行环境](img/case/选择运行环境.png)
+
+#### 测试执行进度
+
+![用例执行进度](img/case/测试执行进度.png)
+
+#### 测试报告
+
+![测试报告](img/report/测试报告.png)
