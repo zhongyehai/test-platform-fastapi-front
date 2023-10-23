@@ -435,6 +435,7 @@ export default {
           this.currentStep.case_id = this.caseId
           this.currentStep.page_id = this.currentElement.page_id
           this.currentStep.element_id = this.currentElement.id
+          this.submitButtonIsLoading = false
           this.drawerIsShow = true
         } else if (drawerType === 'edit') { // 修改步骤
           // 获取元素信息
@@ -448,6 +449,7 @@ export default {
           })
           this.currentStep = step
           this.currentStepCopy = JSON.parse(JSON.stringify(step)) // 深拷贝
+          this.submitButtonIsLoading = false
           this.drawerIsShow = true
         }
 
