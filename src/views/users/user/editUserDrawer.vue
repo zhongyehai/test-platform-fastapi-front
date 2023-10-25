@@ -25,7 +25,18 @@
         </el-form-item>
 
         <el-form-item :label="'密码'" prop="name" size="mini">
-          <el-input v-model="tempUser.password" placeholder="4~50位，若填写，则会修改为此密码，若不填写，则不修改" />
+          <el-input
+            v-model="tempUser.password"
+            style="width: 98%"
+            placeholder="4~50位，若填写，则会修改为此密码，若不填写，则不修改"
+          />
+          <el-popover class="el_popover_class" placement="top-start" trigger="hover">
+            <div>
+              <div>1、当此处填了密码过后，会把用户的密码一并修改</div>
+              <div>2、此功能用于当用户忘记密码过后，管理员帮助用户修改密码</div>
+            </div>
+            <el-button slot="reference" type="text" icon="el-icon-question" />
+          </el-popover>
         </el-form-item>
 
         <el-form-item :label="'业务线'" class="is-required" size="mini">

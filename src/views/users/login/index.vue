@@ -62,13 +62,41 @@
       <!--      </div>-->
 
     </el-form>
+
+    <!-- 修改密码框 -->
+    <el-dialog :title="'修改密码'" :modle="tempPassword" :visible.sync="change_password_dialog_is_show">
+
+      <el-form ref="dataForm" label-position="left" label-width="70px" style="min-width: 400px;">
+        <el-form-item :label="'旧密码'" prop="name" class="filter-item" style="background-color: white" size="mini">
+          <el-input v-model="tempPassword.old_password" />
+        </el-form-item>
+        <el-form-item :label="'新密码'" prop="name" class="filter-item" style="background-color: white" size="mini">
+          <el-input v-model="tempPassword.new_password" />
+        </el-form-item>
+        <el-form-item :label="'确认密码'" prop="name" class="filter-item" style="background-color: white" size="mini">
+          <el-input v-model="tempPassword.sure_password" />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+
+        <el-button size="mini" @click="change_password_dialog_is_show = false"> {{ '取消' }}</el-button>
+        <el-button
+          type="primary"
+          size="mini"
+          :loading="change_password_button_is_loading"
+          @click="change_password"
+        > {{ '确定' }}
+        </el-button>
+      </div>
+
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import * as types from '@/store/types'
 import { validUsername } from '@/utils/validate'
-import { login } from '@/apis/system/user'
+import { ChangeMigrateUserPassword, login } from '@/apis/system/user'
 import { getConfigByCode } from '@/apis/config/config'
 
 export default {
@@ -97,10 +125,20 @@ export default {
         account: [{ required: true, trigger: 'blur', validator: validateAccount }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
+
       loginButtonIsDisabled: false,
       passwordType: 'password',
       redirect: undefined,
-      platformName: null
+      platformName: null,
+
+      change_password_dialog_is_show: false,
+      change_password_button_is_loading: false,
+      // 密码修改临时表单
+      tempPassword: {
+        old_password: '',
+        new_password: '',
+        sure_password: ''
+      }
     }
   },
 
@@ -156,10 +194,38 @@ export default {
               const redirect = this.$route.query.redirect || '/'
               this.$router.push({ path: redirect }) // 重定向到指定路由
               // this.$router.push({path: redirect.slice(redirect.indexOf('=') + 1)})  // 重定向到指定路由
+            } else {
+              if (response.message === '需要修改密码') {
+                this.tempPassword.old_password = ''
+                this.tempPassword.new_password = ''
+                this.tempPassword.sure_password = ''
+                this.change_password_button_is_loading = false
+                this.change_password_dialog_is_show = true
+              }
             }
           })
         } else {
           this.$message.error('数据校验不通过，请确认')
+        }
+      })
+    },
+
+    // 提交修改密码
+    change_password() {
+      this.change_password_button_is_loading = true
+
+      ChangeMigrateUserPassword(
+        {
+          account: this.loginForm.account,
+          old_password: this.tempPassword.old_password,
+          new_password: this.tempPassword.new_password,
+          sure_password: this.tempPassword.sure_password
+        }).then(response => {
+        this.change_password_button_is_loading = false
+        if (this.showMessage(this, response)) {
+          // 自动登录
+          this.loginForm.password = this.tempPassword.new_password
+          this.handleLogin()
         }
       })
     }

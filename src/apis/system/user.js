@@ -32,6 +32,11 @@ export function userPassword(data) {
   return request({ url: currentBaseDir + '/password', method: 'put', data: data })
 }
 
+// 迁移用户修改密码
+export function ChangeMigrateUserPassword(data) {
+  return request({ url: currentBaseDir + '/password/migrate', method: 'put', data: data })
+}
+
 // 获取用户的角色
 export function userRoles(data) {
   return request({ url: currentBaseDir + '/role', method: 'post', data: data })

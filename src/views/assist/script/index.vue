@@ -188,6 +188,7 @@ export default {
         file_name: undefined,
         create_user: undefined,
         update_user: undefined,
+        detail: 1,
         page_num: 1,
         page_size: 20
       },
