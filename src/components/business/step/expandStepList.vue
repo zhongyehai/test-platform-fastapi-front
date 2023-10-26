@@ -46,8 +46,8 @@
           <el-switch
             v-model="scope.row.status"
             size="mini"
-            :inactive-value="0"
-            :active-value="1"
+            :inactive-value="'disable'"
+            :active-value="'enable'"
             @change="changeStatus(scope.row, null, true)"
           />
         </el-tooltip>
