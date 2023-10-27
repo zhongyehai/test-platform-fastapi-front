@@ -1,3 +1,5 @@
+# ！此版本短期内不再更新，长期维护版请移步flask版本：https://github.com/zhongyehai/test-platform-fastapi-front
+
 ## 基于 vue-admin-template 开发测试平台前端
 
 ### 线上预览：http://139.196.100.202/#/login  账号：admin、密码：123456，请不要修改密码

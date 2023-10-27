@@ -369,7 +369,7 @@ export default {
     // 初始化运行环境
     initEnvList(business_id) {
       runEnvList({
-        business_id: this.projectBusinessId ? this.projectBusinessId : business_id
+        business_id: this.projectBusinessId ? this.projectBusinessId : business_id, page_num: 1, page_size: 99999
       }).then(response => {
         this.runEnvDataSource = response.data.data
       })

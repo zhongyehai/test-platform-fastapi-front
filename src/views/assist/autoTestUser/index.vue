@@ -107,7 +107,7 @@ export default {
 
   mounted() {
     // 获取环境配置
-    runEnvList().then(response => {
+    runEnvList({ page_num: 1, page_size: 99999 }).then(response => {
       if (response.data.data.length > 0) {
         this.currentEnv = response.data.data[0].code
       }

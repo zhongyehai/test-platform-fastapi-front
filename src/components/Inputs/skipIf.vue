@@ -312,7 +312,7 @@ export default {
         this.getProjectUrl({ id: this.projectId }).then(response => { // 获取服务
           const project = response.data
 
-          runEnvList({ business_id: project.business_id }).then(response => { // 获取服务的业务线对应的运行环境
+          runEnvList({ business_id: project.business_id, page_num: 1, page_size: 99999 }).then(response => { // 获取服务的业务线对应的运行环境
             this.runEnvList = response.data.data
           })
         })

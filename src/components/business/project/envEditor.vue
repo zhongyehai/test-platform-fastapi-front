@@ -255,7 +255,7 @@ export default {
         this.drawerIsShow = true
 
         // 获取环境配置
-        runEnvList({ business_id: project.business_id }).then(response => {
+        runEnvList({ business_id: project.business_id, page_num: 1, page_size: 99999 }).then(response => {
           this.envList = response.data.data
           if (this.envList.length > 0) {
             this.$nextTick(() => {

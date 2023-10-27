@@ -442,8 +442,8 @@ export default {
       isShowDebugLoading: false,
       tableLoadingIsShow: false,
       skip_holiday_item: [
-        {label: "跳过执行", value: true},
-        {label: "不跳过执行", value: false},
+        { label: '跳过执行', value: true },
+        { label: '不跳过执行', value: false }
       ],
       tempTask: {
         skip_holiday: true,
@@ -601,7 +601,7 @@ export default {
 
     // 获取环境列表
     getRunEnvList() {
-      runEnvList({ business_id: this.projectBusinessId }).then(response => {
+      runEnvList({ business_id: this.projectBusinessId, page_num: 1, page_size: 99999 }).then(response => {
         this.envList = response.data.data
       })
     },
