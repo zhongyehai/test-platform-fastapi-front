@@ -1,4 +1,4 @@
-# ！此版本短期内不再更新，长期维护版请移步flask版本：https://github.com/zhongyehai/test-platform-fastapi-front
+# ！此版本短期内不再更新，长期维护版请移步flask版本：https://github.com/zhongyehai/test-platform-front
 
 ## 基于 vue-admin-template 开发测试平台前端
 
