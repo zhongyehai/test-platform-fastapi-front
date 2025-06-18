@@ -1,0 +1,6 @@
+
+npm install --prefix C:\项目\test-plateform\base\base-front
+
+npm run dev --prefix C:\项目\test-plateform\base\base-front
+
+npm run build --prefix C:\项目\test-plateform\base\base-front

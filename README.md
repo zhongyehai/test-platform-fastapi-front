@@ -1,21 +1,15 @@
-# ！此版本短期内不再更新，长期维护版请移步flask版本：https://github.com/zhongyehai/test-platform-front
-
-## 基于 vue-admin-template 开发测试平台前端
-
-### 线上预览：http://139.196.100.202/#/login  账号：admin、密码：123456，请不要修改密码
-
-### 系统操作手册：[gitee](https://gitee.com/Xiang-Qian-Zou/api-test-api/blob/master/%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C.md) ，[github](https://github.com/zhongyehai/api-test-api/blob/main/%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C.md)
-
-### 后端传送门：https://github.com/zhongyehai/test-platform-fastapi-api
+# 测试平台前端 - vue3版本
 
 ## 步骤
 
 ```bash
-# 1.安装node14.x（一定要控制在14.x，版本太高会出一系列幺蛾子），确保在 cmd 下 node -v 能出现版本号
+# 1.安装node18+，确保在 cmd 下 node -v 能出现版本号
 # 2.克隆并进入项目目录
 # 3.安装依赖
-npm install --registry=https://registry.npm.taobao.org
+npm install 
 
+或者 
+npm install --registry=https://registry.npmmirror.com
 # 4.启动服务
 npm run dev
 
@@ -23,7 +17,9 @@ npm run dev
 npm run build
 ```
 
-浏览器访问 [http://localhost:8023](http://localhost:8023), 账号admin, 密码123456
+## 线上预览：http://139.196.100.202/#/login  账号：admin、密码：123456，请不要修改密码
+
+## 后端传送门：https://github.com/zhongyehai/test-platform-fastapi-api
 
 ## 项目关键截图
 
@@ -38,3 +34,11 @@ npm run build
 #### 测试报告
 
 ![测试报告](img/report/测试报告.png)
+
+
+## 在项目中使用iconPark的图标
+### 在 https://iconpark.oceanengine.com/official 选择图标，选择复制Vue代码，并复制icon的代码
+![选择复制vue代码](img/use-icon-park/复制icon代码.png)
+
+### 使用icon，如果是多个单词用 "-" 拼接的代码，记得改为驼峰
+![使用icon](img/use-icon-park/使用icon.png)
