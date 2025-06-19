@@ -26,7 +26,7 @@
 
         <el-table-column show-overflow-tooltip label="创建时间" prop="create_time" align="center" min-width="15%">
           <template #default="scope">
-            <span>{{ scope.row.create_time }}</span>
+            <span>{{ paramsISOTime(scope.row.create_time) }}</span>
           </template>
         </el-table-column>
 
@@ -65,7 +65,7 @@
 
         <div style="margin-bottom: 20px">
           <label class="label-style">创建时间：</label>
-          <span>{{ currentDetail.create_time }}</span>
+          <span>{{ paramsISOTime(currentDetail.create_time) }}</span>
         </div>
 
         <div style="margin-bottom: 20px">
@@ -96,6 +96,7 @@ import Pagination from "@/components/pagination.vue";
 import toClipboard from "@/utils/copy-to-memory";
 import {ElMessage} from "element-plus";
 import showJson from "@/components/show-json.vue";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const drawerIsShow = ref(false)
 const detailIsShow = ref(false)

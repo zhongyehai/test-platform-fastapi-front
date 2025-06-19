@@ -56,7 +56,7 @@
 
         <el-table-column show-overflow-tooltip label="发送时间" prop="create_time" align="center" min-width="20%">
           <template #default="scope">
-            <span>{{ scope.row.create_time }}</span>
+            <span>{{ paramsISOTime(scope.row.create_time) }}</span>
           </template>
         </el-table-column>
 
@@ -98,6 +98,7 @@ import {GetQueueTopicLogList} from "@/api/tools/queue";
 import toClipboard from "@/utils/copy-to-memory";
 import {ElMessage} from "element-plus";
 import Pagination from "@/components/pagination.vue";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const props = defineProps({
   userDict: {

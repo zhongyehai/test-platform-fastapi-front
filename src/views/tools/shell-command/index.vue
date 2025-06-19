@@ -92,7 +92,7 @@
 
                 <el-table-column show-overflow-tooltip prop="create_time" align="center" label="创建时间" width="130">
                   <template #default="scope">
-                    <span>{{ scope.row.create_time }}</span>
+                    <span>{{ paramsISOTime(scope.row.create_time) }}</span>
                   </template>
                 </el-table-column>
 
@@ -186,6 +186,7 @@ import {
   SendShellCommand
 } from "@/api/tools/shell-command";
 import toClipboard from "@/utils/copy-to-memory";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const commandTreeRef = ref<InstanceType<typeof ElTree>>()
 const defaultProps = {children: 'children', label: 'label'}

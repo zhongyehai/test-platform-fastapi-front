@@ -19,7 +19,7 @@
 
         <el-table-column show-overflow-tooltip label="创建时间" prop="create_time" align="center" min-width="15%">
           <template #default="scope">
-            <span> {{ scope.row.create_time }} </span>
+            <span> {{ paramsISOTime(scope.row.create_time) }} </span>
           </template>
         </el-table-column>
 
@@ -68,6 +68,7 @@ import Pagination from '@/components/pagination.vue'
 import {GetCallBack, GetCallBackList} from "@/api/assist/call-back";
 import showJson from "@/components/show-json.vue";
 import {bus, busEvent} from "@/utils/bus-events";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const tableIsLoading = ref(false)
 const tableDataList = ref([])

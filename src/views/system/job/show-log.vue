@@ -18,7 +18,7 @@
 
           <el-table-column show-overflow-tooltip label="执行时间" prop="create_time" align="center" min-width="15%">
             <template #default="scope">
-              <span> {{ scope.row.create_time }} </span>
+              <span> {{ paramsISOTime(scope.row.create_time) }} </span>
             </template>
           </el-table-column>
 
@@ -76,6 +76,7 @@ import showJson from '@/components/show-json.vue'
 
 import {GetJobRunLog, GetJobRunLogList} from "@/api/system/job";
 import {GetBusinessList} from "@/api/config/business";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const businessDict = ref({})
 const statusTagMapping = ref({0: 'info', 1: 'danger', 2: 'success'})

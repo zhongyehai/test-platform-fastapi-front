@@ -99,7 +99,7 @@
 
         <el-table-column show-overflow-tooltip label="创建时间" prop="create_time" align="center" min-width="12%">
           <template #default="scope">
-            <span>{{ scope.row.create_time }}</span>
+            <span>{{ paramsISOTime(scope.row.create_time) }}</span>
           </template>
         </el-table-column>
 
@@ -139,6 +139,7 @@ import AddDrawer from './add-drawer.vue'
 import {bus, busEvent} from "@/utils/bus-events";
 import {ChangePermissionSort, DeletePermission, GetPermissionList, GetPermissionType} from "@/api/system/permission";
 import {Help, SortThree} from "@icon-park/vue-next";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const activeName = ref('front')
 const tableIsLoading = ref(false)

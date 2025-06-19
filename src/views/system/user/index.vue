@@ -92,7 +92,7 @@
 
         <el-table-column show-overflow-tooltip label="创建时间" prop="create_time" align="center" min-width="20%">
           <template #default="scope">
-            <span>{{ scope.row.create_time }}</span>
+            <span>{{ paramsISOTime(scope.row.create_time) }}</span>
           </template>
         </el-table-column>
 
@@ -133,6 +133,7 @@ import {GetUserList, ChangeUserStatus, ResetPassword, GetUserRoles, ChangeUserSo
 import {GetRoleList} from "@/api/system/role";
 import {GetBusinessList} from "@/api/config/business";
 import {Help, SortThree} from "@icon-park/vue-next";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const isAdmin = localStorage.getItem('permissions').indexOf('admin') !== -1
 const tableIsLoading = ref(false)

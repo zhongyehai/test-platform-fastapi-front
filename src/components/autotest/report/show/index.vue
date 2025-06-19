@@ -13,7 +13,7 @@
           <span v-if="testType !== 'app'" style="margin-right: 20px"
           >运行环境: {{runEnvDict[reportSummary.env.code] }}</span>
           <span style="margin-right: 20px">执行模式: {{ report.is_async === 1 ? '并行运行' : '串行运行' }}</span>
-          <span style="margin-right: 20px">开始时间: {{ report.create_time }}</span>
+          <span style="margin-right: 20px">开始时间: {{ paramsISOTime(report.create_time) }}</span>
           <!-- 执行耗时保留3为小数 -->
           <span style="margin-right: 20px">总共耗时: {{
               reportSummary.time.all_duration ? reportSummary.time.all_duration.toString().slice(0, 5) : '-'
@@ -224,6 +224,7 @@ import {GetCase, GetCaseFromProject, RunCase} from "@/api/business-api/case";
 import {RunTask} from "@/api/business-api/task";
 import {RunCaseSuite} from "@/api/business-api/case-suite";
 import {RunApi} from "@/api/business-api/api";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const props = defineProps({
   testType: {

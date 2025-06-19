@@ -27,7 +27,7 @@
     </div>
     <div class="options">
       <p v-for="(option, key) in data.options" :key="key">{{ option }}</p>
-      <p>{{ userDict[data.create_user] }} 创建于 {{ data.create_time }}</p>
+      <p>{{ userDict[data.create_user] }} 创建于 {{ paramsISOTime(data.create_time) }}</p>
       <p v-if="data.status == 'done'">{{ userDict[data.done_user] }} 完成于 {{ data.done_time }}</p>
     </div>
   </div>
@@ -38,6 +38,7 @@ import {computed} from 'vue'
 import {bus, busEvent} from "@/utils/bus-events";
 import {Delete, PreviewOpen, Copy, Write, Plus, Help} from "@icon-park/vue-next";
 import {DeleteTodo} from "@/api/manage/todo";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const props = defineProps({
   data: {

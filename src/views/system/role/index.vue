@@ -74,13 +74,13 @@
 
         <el-table-column show-overflow-tooltip label="创建时间" prop="create_time" align="center" min-width="15%">
           <template #default="scope">
-            <span>{{ scope.row.create_time }}</span>
+            <span>{{ paramsISOTime(scope.row.create_time) }}</span>
           </template>
         </el-table-column>
 
         <el-table-column show-overflow-tooltip label="修改时间" prop="update_time" align="center" min-width="15%">
           <template #default="scope">
-            <span>{{ scope.row.update_time }}</span>
+            <span>{{ paramsISOTime(scope.row.update_time) }}</span>
           </template>
         </el-table-column>
 
@@ -117,6 +117,7 @@ import EditDrawer from './drawer.vue'
 import {bus, busEvent} from "@/utils/bus-events";
 import {GetRoleList, DeleteRole, ChangeRoleSort} from "@/api/system/role";
 import {Help, SortThree} from "@icon-park/vue-next";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const tableIsLoading = ref(false)
 const tableDataList = ref([])

@@ -54,7 +54,7 @@
 
         <el-table-column show-overflow-tooltip label="创建时间" prop="create_time" align="center" min-width="20%">
           <template #default="scope">
-            <span>{{ scope.row.create_time }}</span>
+            <span>{{ paramsISOTime(scope.row.create_time) }}</span>
           </template>
         </el-table-column>
 
@@ -85,6 +85,7 @@ import EditDrawer from './edit-drawer.vue'
 
 import {bus, busEvent} from "@/utils/bus-events";
 import {GetUserList} from "@/api/system/user";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const tableIsLoading = ref(false)
 const tableDataList = ref([])
