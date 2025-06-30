@@ -52,11 +52,11 @@
           </template>
         </el-table-column>
 
-        <el-table-column show-overflow-tooltip label="创建时间" prop="create_time" align="center" min-width="20%">
-          <template #default="scope">
-            <span>{{ paramsISOTime(scope.row.create_time) }}</span>
-          </template>
-        </el-table-column>
+<!--        <el-table-column show-overflow-tooltip label="创建时间" prop="create_time" align="center" min-width="20%">-->
+<!--          <template #default="scope">-->
+<!--            <span>{{ paramsISOTime(scope.row.create_time) }}</span>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
 
         <el-table-column show-overflow-tooltip align="center" label="操作" width="110">
           <template #default="scope">

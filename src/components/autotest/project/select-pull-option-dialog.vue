@@ -81,9 +81,7 @@ const pullBySwagger = () =>  {
   pullButtonIsLoading.value = true
   PullFromSwagger({ project_id: projectId.value, options: checkedOptions.value }).then(response => {
     pullButtonIsLoading.value = false
-    if (response){
-      sendSuccess()
-    }
+    sendSuccess()
   })
 }
 

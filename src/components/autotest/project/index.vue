@@ -321,7 +321,6 @@ const handleDrop = (event, newIndex) => {
 
 const showSwaggerPullLog = (row: object) => {
   if (row.last_pull_status !== 1) {
-    console.log('show-swagger-pull-log')
     bus.emit(busEvent.drawerIsShow, {eventType: 'show-swagger-pull-log', content: row})
   }
 }

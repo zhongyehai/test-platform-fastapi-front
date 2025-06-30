@@ -466,7 +466,7 @@ const changeStatus = (row: { status?: any; id?: any; }) => {
 const enableTask = (taskId: number) => {
   tableIsLoading.value = true
   EnableTask(props.testType, {id: taskId}).then(response => {
-    tableIsLoading.value = true
+    tableIsLoading.value = false
     if (response) {
       getTableDataList()
     }
@@ -476,7 +476,7 @@ const enableTask = (taskId: number) => {
 const disableTask = (taskId: number) => {
   tableIsLoading.value = true
   DisableTask(props.testType, {id: taskId}).then(response => {
-    tableIsLoading.value = true
+    tableIsLoading.value = false
     if (response) {
       getTableDataList()
     }
