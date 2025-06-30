@@ -164,6 +164,7 @@
         <el-table-column fixed="right" prop="desc" align="center" label="操作" width="140">
           <template #default="scope">
             <el-button v-if="scope.row.quote_case" type="text" size="small" style="margin: 0; padding: 2px" @click.native="showEditNameDrawer(scope.row)">改名</el-button>
+
             <el-button v-if="!scope.row.quote_case" type="text" size="small" style="margin: 0; padding: 2px" @click="showEditDrawer(scope.row)">修改</el-button>
 
             <el-popconfirm width="250px" :title="`复制用例【${scope.row.name}】下的所有步骤，并在【当前用例】下生成对应的步骤?`" @confirm="copyCaseStepToCurrentCase(scope.row)">

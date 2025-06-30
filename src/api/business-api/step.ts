@@ -40,6 +40,10 @@ export function CopyStep(testType: string, data: object) {
     return request({ url: getBaseDir(testType) + '/copy', method: 'post', data: data })
 }
 
+export function ChangeStepElement(testType: string, data: object) {
+    return request({ url: getBaseDir(testType) + '/element', method: 'put', data: data })
+}
+
 export function GetKeyBoardCodeMappingList() {
     return request({ url: getBaseDir('ui') + '/key-board-code', method: 'get' })
 }

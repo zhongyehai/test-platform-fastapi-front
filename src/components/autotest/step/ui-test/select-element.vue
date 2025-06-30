@@ -125,6 +125,7 @@ import toClipboard from "@/utils/copy-to-memory";
 import {arrayToTree} from "@/utils/parse-data";
 import {GetElementList} from "@/api/business-api/element";
 import {GetPageList} from "@/api/business-api/page";
+import {ChangeStepElement} from "@/api/business-api/step";
 
 const props = defineProps({
   testType: {
@@ -138,7 +139,11 @@ const props = defineProps({
   caseId: {
     default: '',
     type: Number,
-  }
+  },
+  stepId: {
+    default: '',
+    type: Number
+  },
 })
 
 const queryItems = ref({
@@ -227,11 +232,20 @@ const selectPage = (pageId: any) => {
   })
 }
 
+// 新增步骤或者更换步骤选择的元素
 const elementToStep = (row: any) => {
-  const step = JSON.parse(JSON.stringify(row));
-  step.element_id = step.id
-  step.id = undefined
-  bus.emit(busEvent.drawerIsShow, {eventType: 'step-editor', content: step})
+  if (props.stepId){ // 步骤更换元素
+    ChangeStepElement(props.testType, {id: props.stepId, element_id: row.id}).then(response => {
+      if (response){
+        bus.emit(busEvent.drawerIsCommit, {eventType: 'change-step-element', elementId: row.id})
+      }
+    })
+  }else { // 新增步骤
+    const step = JSON.parse(JSON.stringify(row));
+    step.element_id = step.id
+    step.id = undefined
+    bus.emit(busEvent.drawerIsShow, {eventType: 'step-editor', content: step})
+  }
 }
 
 onMounted(() => {

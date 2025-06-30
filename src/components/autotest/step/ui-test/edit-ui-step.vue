@@ -12,7 +12,10 @@
             </el-form-item>
 
             <el-form-item label="元素归属" prop="from" size="small">
-              <el-input v-model="element.from" disabled />
+              <el-input v-model="element.from" style="width: 95%" disabled />
+              <span style="margin-left: 5px; width: 4%">
+               <el-button type="primary" size="small"  @click="showAddStepDrawer(formData)">更换</el-button>
+              </span>
             </el-form-item>
 
             <el-form-item label="步骤描述" prop="addr" size="small">
@@ -372,6 +375,9 @@ const onShowDrawerEvent = (message: any) => {
 const onDrawerIsCommit = (message: any) => {
   if (message.eventType === 'uploadFile') {
     formData.value.send_keys = message.content.fileNameList[0]
+  }else if (message.eventType === 'change-step-element') {
+    formData.value.element_id = message.elementId
+    getElement(formData.value.element_id)
   }
 }
 
@@ -518,6 +524,10 @@ const getElement = (elementId: number) => {
       })
     })
   })
+}
+
+const showAddStepDrawer = () => {
+  bus.emit(busEvent.drawerIsShow, {eventType: 'select-step',  command: 'add', caseId: formData.value.case_id, step: formData.value});
 }
 
 const openFileUploadDialog = () => {

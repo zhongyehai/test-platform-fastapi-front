@@ -12,7 +12,10 @@
             </el-form-item>
 
             <el-form-item label="所属接口" prop="api_from" size="small">
-              <el-input v-model="formData.api_from" size="small" disabled />
+              <el-input v-model="formData.api_from" size="small" style="width: 95%" disabled />
+              <span style="margin-left: 5px; width: 4%">
+               <el-button type="primary" size="small"  @click="showAddStepDrawer(formData)">更换</el-button>
+              </span>
             </el-form-item>
 
             <el-form-item label="请求方法" prop="method" size="small">
@@ -353,12 +356,21 @@ const props = defineProps({
 })
 
 onMounted(() => {
+  bus.on(busEvent.drawerIsCommit, drawerIsCommit);
   bus.on(busEvent.drawerIsShow, onShowDrawerEvent);
 })
 
 onBeforeUnmount(() => {
+  bus.off(busEvent.drawerIsCommit, drawerIsCommit);
   bus.off(busEvent.drawerIsShow, onShowDrawerEvent);
 })
+
+const drawerIsCommit = (message: any) => {
+  if (message.eventType === 'change-step-element') {
+    formData.value.api_id = message.apiId
+    getApi(formData.value.api_id, false)
+  }
+}
 
 const onShowDrawerEvent = (message: any) => {
   if (message.eventType === 'step-editor') {
@@ -491,6 +503,10 @@ const showSelectValidator = () => {
   bus.emit(busEvent.drawerIsShow, {eventType: 'showSelectValidator'});
 }
 
+const showAddStepDrawer = () => {
+  bus.emit(busEvent.drawerIsShow, {eventType: 'select-step',  command: 'add', caseId: formData.value.case_id, step: formData.value});
+}
+
 const SaveKVString = () => {
   if (KVStringType.value === ':'){
     try {
@@ -551,7 +567,7 @@ const submitForm = () =>{
 const getData = (step: { id: any; api_id: number; }) => {
   GetStep(props.testType, {id: step.id}).then(response => {
     formData.value = response.data
-    getApi(step.api_id, false)
+    getApi(formData.value.api_id, false)
   })
 }
 

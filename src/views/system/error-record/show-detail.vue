@@ -66,7 +66,6 @@ const getDetailData = (dataId: number) => {
 
 const onShowDrawerEvent = (message: any) => {
   if (message.eventType === 'error-record') {
-    console.log(message)
     getDetailData(message.content.id)
     drawerIsShow.value = true
   }

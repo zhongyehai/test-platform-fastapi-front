@@ -148,6 +148,7 @@ import {ElMessage} from "element-plus";
 import Pagination from "@/components/pagination.vue";
 import toClipboard from "@/utils/copy-to-memory";
 import {arrayToTree} from "@/utils/parse-data";
+import {ChangeStepElement} from "@/api/business-api/step";
 
 const props = defineProps({
   testType: {
@@ -159,6 +160,10 @@ const props = defineProps({
     type: Number,
   },
   caseId: {
+    default: '',
+    type: Number,
+  },
+  stepId: {
     default: '',
     type: Number,
   }
@@ -261,11 +266,20 @@ const getApiToStep = () => {
   })
 }
 
+// 新增步骤或者更换步骤选择的接口
 const apiToStep = (row: any) => {
-  const step = JSON.parse(JSON.stringify(row));
-  step.api_id = step.id
-  step.id = undefined
-  bus.emit(busEvent.drawerIsShow, {eventType: 'step-editor', content: step})
+  if (props.stepId){ // 步骤更换接口
+    ChangeStepElement(props.testType, {id: props.stepId, element_id: row.id}).then(response => {
+      if (response){
+        bus.emit(busEvent.drawerIsCommit, {eventType: 'change-step-element', apiId: row.id})
+      }
+    })
+  }else { // 新增步骤
+    const step = JSON.parse(JSON.stringify(row));
+    step.api_id = step.id
+    step.id = undefined
+    bus.emit(busEvent.drawerIsShow, {eventType: 'step-editor', content: step})
+  }
 }
 
 onMounted(() => {

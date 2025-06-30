@@ -183,7 +183,6 @@ const addData = () => {
   addRuleFormRef.value.validate((valid) => {
     if (valid) {
       let addList = addTableRef.value.tableDataList
-      console.log(addList)
       if (addList < 1){
         ElMessage.warning('请录入环境数据')
       }
