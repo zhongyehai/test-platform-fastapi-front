@@ -128,7 +128,7 @@
       />
     </div>
 
-    <apiFromDrawer :case-id="caseId" />
+    <apiFromDrawer :case-id="caseId" :step-id="stepId"/>
     <apiUseDrawer/>
 
   </div>

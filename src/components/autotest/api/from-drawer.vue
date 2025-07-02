@@ -136,11 +136,16 @@ import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
 import {ChangeApiLevel, ChangeApiStatus, GetApiToStep} from "@/api/business-api/api";
+import {ChangeStepElement} from "@/api/business-api/step";
 
 const props = defineProps({
   caseId: {
     default: undefined,
     type: Number
+  },
+  stepId: {
+    default: '',
+    type: Number,
   }
 })
 
@@ -200,10 +205,18 @@ const showEditDrawer = (row: any) => {
 }
 
 const apiToStep = (row: any) => {
-  const step = JSON.parse(JSON.stringify(row));
-  step.api_id = step.id
-  step.id = undefined
-  bus.emit(busEvent.drawerIsShow, {eventType: 'step-editor', content: step})
+  if (props.stepId){ // 步骤更换接口
+    ChangeStepElement('api', {id: props.stepId, element_id: row.id}).then(response => {
+      if (response){
+        bus.emit(busEvent.drawerIsCommit, {eventType: 'change-step-element', apiId: row.id})
+      }
+    })
+  }else { // 新增步骤
+    const step = JSON.parse(JSON.stringify(row));
+    step.api_id = step.id
+    step.id = undefined
+    bus.emit(busEvent.drawerIsShow, {eventType: 'step-editor', content: step})
+  }
 }
 
 onMounted(() => {
