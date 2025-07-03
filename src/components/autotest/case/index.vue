@@ -439,7 +439,7 @@ const copyCase = (row: any) => {
     tableIsLoading.value = false
     if (response){
       getTableDataList()
-      showEditDrawer('edit', response.data.case)  // 复制完毕后打开编辑框
+      showEditDrawer('edit', response.data)  // 复制完毕后打开编辑框
     }
   })
 }
