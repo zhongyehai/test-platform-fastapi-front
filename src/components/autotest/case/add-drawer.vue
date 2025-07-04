@@ -164,10 +164,6 @@ const resetForm = () => {
   submitButtonIsLoading.value = false
 }
 
-const sendEvent = () => {
-  bus.emit(busEvent.drawerIsCommit, {eventType: 'case-editor'});
-}
-
 const getNewData = () => {
   return { id: `${Date.now()}`, name: null, desc: null }
 }
@@ -215,7 +211,7 @@ const addData = () => {
   PostCase(props.testType, formData.value).then(response => {
     submitButtonIsLoading.value = false
     if (response) {
-      sendEvent()
+      bus.emit(busEvent.drawerIsCommit, {eventType: 'case-editor', data: response});
       drawerIsShow.value = false
     }
   })

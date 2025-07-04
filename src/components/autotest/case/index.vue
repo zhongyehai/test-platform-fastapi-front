@@ -521,6 +521,9 @@ onBeforeUnmount(() => {
 const drawerIsCommit = (message: any) => {
   if (message.eventType === 'case-editor') {
     getTableDataList()
+    if (message.data && message.data.data){
+      showEditDrawer('edit', message.data.data)  // 新增完毕后打开编辑框
+    }
   } else if (message.eventType === 'select-run-env' && message.triggerFrom === triggerFrom) {
     runCase(message)
   }
