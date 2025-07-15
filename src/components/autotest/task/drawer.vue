@@ -688,6 +688,7 @@ const clickRun = () =>{
     eventType: 'select-run-env',
     triggerFrom: triggerFrom,
     showSelectRunModel: true,
+    runName: formData.value.name,
     business_id: project.value.business_id,
     runArgs: undefined
   })

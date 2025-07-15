@@ -202,24 +202,55 @@
 <script setup lang="ts">
 import {Help} from "@icon-park/vue-next";
 import skipIfView from '@/components/input/skip-if.vue'
+import {GetReportCaseDetail} from "@/api/business-api/report";
+import {onBeforeUnmount, onMounted, ref} from "vue";
+import {bus, busEvent} from "@/utils/bus-events";
 
 const props = defineProps({
   testType: {
     default: '',
     type: String
-  },
-  reportCaseData: {
-    default: {
-      name: '',
-      result: '',
-      error_msg: '',
-      summary: ''
-    },
-    type: Object
   }
 })
 
-const defaultShowDetailInfo =  ['error_msg', 'caseInfo', 'stepInfo', props.reportCaseData.error_msg ? 'error_msg' : '']
+const reportCaseData = ref({
+  name: '',
+  result: '',
+  error_msg: '',
+  summary: {
+    "stat": {
+      "fail": 0,
+      "skip": 0,
+      "error": 0,
+      "total": 0,
+      "success": 0,
+      "response_time": {
+        "slow": [],
+        "very_slow": []
+      }
+    },
+    "time": {
+      "end_at": "",
+      "start_at": "",
+      "all_duration": 0,
+      "case_duration": 0,
+      "step_duration": 0
+    },
+    "result": ""
+  },
+  case_data: {
+    "id": 15,
+    "name": "",
+    "headers": {},
+    "run_env": "",
+    "skip_if": [],
+    "run_type": "",
+    "suite_id": 0,
+    "run_times": 1,
+    "variables": {}
+  }
+})
+const defaultShowDetailInfo =  ['error_msg', 'caseInfo', 'stepInfo', reportCaseData.value.error_msg ? 'error_msg' : '']
 const resultMapping = {waite: '等待', running: '执行中', fail: '不通过', success: '通过', skip: '跳过', error: '报错'}
 const resultTagMapping = {waite: 'info', running: '', fail: 'danger', success: 'success', skip: 'info', error: 'warning'}
 
@@ -229,6 +260,26 @@ const objectToList = (variables) => {
     newVariables.push({key: key, value: variables[key]})
   })
   return newVariables
+}
+
+const getReportCaseDetail = (dataId) => {
+  GetReportCaseDetail(props.testType, {id: dataId}).then(response => {
+    reportCaseData.value = response.data
+  })
+}
+
+onMounted(() => {
+  bus.on(busEvent.drawerIsShow, onShowDrawerEvent);
+})
+
+onBeforeUnmount(() => {
+  bus.off(busEvent.drawerIsShow, onShowDrawerEvent);
+})
+
+const onShowDrawerEvent = (message: any) => {
+  if (message.eventType === 'show-report-case-detail') {
+    getReportCaseDetail(message.reportCaseId)
+  }
 }
 
 </script>

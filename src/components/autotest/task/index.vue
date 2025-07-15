@@ -387,6 +387,7 @@ const clickRun = (row) => {
     eventType: 'select-run-env',
     triggerFrom: triggerFrom,
     showSelectRunModel: true,
+    runName: row.name,
     business_id: project.value.business_id,
     runArgs: undefined,
     runEnv: row.env_list[0] // 默认选择任务设置的第一个环境

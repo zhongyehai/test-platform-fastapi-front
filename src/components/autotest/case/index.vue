@@ -378,6 +378,7 @@ const clickRun = (row) => {
     eventType: 'select-run-env',
     triggerFrom: triggerFrom,
     showSelectRunModel: false,
+    runName: row.name,
     business_id: project.value.business_id,
     runArgs: tempRunArgs
   })

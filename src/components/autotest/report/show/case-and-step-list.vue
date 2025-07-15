@@ -34,17 +34,17 @@
               >
                 <template #default="{ node, data }">
                   <div class="custom-tree-node" @mouseenter="mouseenter(data)" @mouseleave="mouseleave(data)">
-                  <span :style="{
-                    'color': getColor(data),
-                    'textDecoration': data.result === 'skip' ? 'line-through' : ''
-                  }"
-                  >
-                    <span style="font-size: 12px">【{{ getTage(data) }}】<span :style="{color: getSpanColor(data)}">{{ getDuration(data) }}</span></span>
-                    <span>{{ node.label }}</span>
-                  </span>
-                    <span v-show="data.id === currentNode.id && data.suite_id && data.result !== 'waite'">
-                      <el-button type="primary" @click.stop="showCaseEditor(data)" style="margin: 0; padding: 4px">编辑</el-button>
-                  </span>
+                    <span :style="{
+                      'color': getColor(data),
+                      'textDecoration': data.result === 'skip' ? 'line-through' : ''
+                    }"
+                    >
+                      <span style="font-size: 12px">【{{ getTage(data) }}】<span :style="{color: getSpanColor(data)}">{{ getDuration(data) }}</span></span>
+                      <span>{{ node.label }}</span>
+                    </span>
+                      <span v-show="data.id === currentNode.id && data.suite_id && data.result !== 'waite'">
+                        <el-button type="primary" @click.stop="showCaseEditor(data)" style="margin: 0; padding: 4px">编辑</el-button>
+                    </span>
                   </div>
                 </template>
               </el-tree>
@@ -74,6 +74,7 @@
             <el-tab-pane :label="caseDataTab" :name="caseDataTab">
               <el-scrollbar class="aside_scroll" :style="{height: `${scrollHeight}`}">
                 <showReportCaseDetailView :test-type="testType" :report-case-data="reportCase"/>
+<!--                <showReportCaseDetailView :test-type="testType"/>-->
               </el-scrollbar>
             </el-tab-pane>
           </el-tabs>
@@ -152,13 +153,12 @@ const getColor = (data) => {
 }
 
 const getTage = (data) => {
-  return data.summary === undefined ? '用例集' :
-      data.report_case_id ? '步骤' : '用例'
+  return data.report_case_id ? '步骤' : data.suite_id ? '用例' : '用例集'
 }
 
 const getDuration = (data) => {
   if (!data.summary) return ''
-  return data.summary.time ? `【${data.summary.time.all_duration}秒】` : `【${data.summary.elapsed_ms}毫秒】`
+  return data.summary.time ? `【${data.summary.time.all_duration}秒】` : `【${data.summary.elapsed_ms || 0}毫秒】`
 }
 
 // 如果是接口自动化测试，把响应时间长的耗时标注出来
@@ -176,11 +176,16 @@ const getSpanColor = (data) => {
 }
 
 const clickTree = (data: any) => {
+  console.log(data)
   if (data.report_case_id) { // 点步骤
     getStepData(data.id)
     reportCaseDetailIsShow.value = false
-  } else if (data.summary !== undefined) { // 点用例
+  } else if (data.suite_id) { // 点用例
     reportCase.value = JSON.parse(JSON.stringify(data))
+    bus.emit(busEvent.drawerIsShow, {
+      eventType: 'show-report-case-detail',
+      reportCaseId: data.id
+    })
     reportStepDetailIsShow.value = false
     reportCaseDetailIsShow.value = true
   }

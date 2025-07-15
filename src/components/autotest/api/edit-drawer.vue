@@ -524,6 +524,7 @@ const selectRunEnv = () => {
     eventType: runEvent,
     triggerFrom: runTrigger,
     showSelectRunModel: false,
+    runName: formData.value.name,
     business_id: props.businessId,
     args: null
   })

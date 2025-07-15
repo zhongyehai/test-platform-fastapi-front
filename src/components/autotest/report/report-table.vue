@@ -367,6 +367,7 @@ const sendReRun = (tempRunArgs: any) => {
     eventType: 'select-run-env',
     triggerFrom: triggerFrom,
     showSelectRunModel: ['task', 'suite'].indexOf(report.value.run_type) !== -1,
+    runName: report.value.name,
     business_id: projectBusinessId.value,
     runArgs: tempRunArgs,
     runEnv: report.value.summary.env.code

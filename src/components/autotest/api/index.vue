@@ -352,6 +352,7 @@ const showEnvSelector = (row) => {
     eventType: runEvent,
     triggerFrom: runTrigger,
     showSelectRunModel: false,
+    runName: row.name,
     business_id: project.value.business_id,
     args: null
   })

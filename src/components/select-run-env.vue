@@ -7,6 +7,9 @@
       :close-on-click-modal="false"
       width="75%"
   >
+    <div v-show="runName" style="text-align: center; margin-bottom: 20px" class="el-collapse-item-title">
+      运行【{{ runName }}】
+    </div>
     <el-scrollbar class="aside_scroll" :style="{height: `${envScrollHeight}`}">
       <el-collapse v-model="defaultSettingItems">
         <el-collapse-item name="selectRunEnv">
@@ -300,6 +303,7 @@ const triggerFrom = ref()
 const runServerList = ref([])
 const runPhoneList = ref([])
 const envScrollHeight = ref('10px')
+const runName = ref("")
 
 const setTableHeight = () => {
   if (window.innerHeight < 800){  // 小屏
@@ -329,6 +333,7 @@ const onDrawerIsShow = (message) => {
   if (message.eventType === eventType) {
     triggerFrom.value = message.triggerFrom
     showSelectRunModel.value =  message.showSelectRunModel
+    runName.value = message.runName ? message.runName : ""
 
     // 设置执行环境
     if (props.testType === 'api') {
