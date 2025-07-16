@@ -396,7 +396,7 @@ const getTempVariables = () =>  {
 
 const runData = () =>  {
   const selectRunEnv = runEnvCheckboxRef.value.selectedEnvDataList
-  if (runPhone.value || selectRunEnv.length > 0) {
+  if (selectRunEnv.length > 0) {
     const temp_variables = getTempVariables()
     const data = {
       eventType: eventType,
