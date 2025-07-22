@@ -121,7 +121,7 @@
 import {ref} from "vue";
 import {busEvent} from "@/utils/bus-events";
 import showCaseVariables from "./show-variables.vue";
-import {GetCaseFrom} from "@/api/business-api/case";
+import {GetCaseFrom} from "@/api/autotest/case";
 
 const props = defineProps({
   testType: {

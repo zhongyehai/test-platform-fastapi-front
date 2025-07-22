@@ -62,7 +62,7 @@
 <script lang="ts" setup>
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
-import {PutCaseSuite, GetCaseSuite} from "@/api/business-api/case-suite";
+import {PutCaseSuite, GetCaseSuite} from "@/api/autotest/case-suite";
 import {bus, busEvent} from "@/utils/bus-events";
 import {GetConfigByCode} from "@/api/config/config-value";
 

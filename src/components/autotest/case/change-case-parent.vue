@@ -56,8 +56,8 @@
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
-import {ChangeCaseParent} from "@/api/business-api/case";
-import {GetCaseSuiteList} from "@/api/business-api/case-suite";
+import {ChangeCaseParent} from "@/api/autotest/case";
+import {GetCaseSuiteList} from "@/api/autotest/case-suite";
 import {arrayToTree} from "@/utils/parse-data";
 
 const props = defineProps({

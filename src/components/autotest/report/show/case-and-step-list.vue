@@ -92,7 +92,7 @@ import {
   GetReportStepDetail,
   GetReportStepImg,
   GetReportSuiteList
-} from "@/api/business-api/report";
+} from "@/api/autotest/report";
 import {bus, busEvent} from "@/utils/bus-events";
 import showReportCaseDetailView from './case-detail.vue'
 import showReportStepDetailView from './step-detail.vue'

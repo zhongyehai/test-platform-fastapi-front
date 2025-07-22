@@ -164,8 +164,8 @@ import showCaseDesc from '@/components/autotest/case/show-desc.vue'
 import editCaseDrawer from '@/components/autotest/case/edit-drawer.vue'
 import {bus, busEvent} from "@/utils/bus-events";
 import {GetBusinessList} from "@/api/config/business";
-import {GetProjectList} from "@/api/business-api/project";
-import {GetMakeDataCaseList, RunCase} from "@/api/business-api/case";
+import {GetProjectList} from "@/api/autotest/project";
+import {GetMakeDataCaseList, RunCase} from "@/api/autotest/case";
 import {ElTree} from "element-plus";
 import ReportTable from "@/components/autotest/report/report-table.vue";
 import {GetUserList} from "@/api/system/user";

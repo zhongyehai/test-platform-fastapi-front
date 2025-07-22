@@ -137,9 +137,9 @@
 <script lang="ts" setup>
 
 import {computed, onBeforeUnmount, onMounted, ref} from "vue";
-import {GetApi, GetApiFrom, GetApiList, GetApiToStep} from "@/api/business-api/api";
-import {GetProjectList} from "@/api/business-api/project";
-import {GetModuleList} from "@/api/business-api/module";
+import {GetApi, GetApiFrom, GetApiList, GetApiToStep} from "@/api/autotest/api";
+import {GetProjectList} from "@/api/autotest/project";
+import {GetModuleList} from "@/api/autotest/module";
 import {bus, busEvent} from "@/utils/bus-events";
 import apiFromDrawer from "@/components/autotest/api/from-drawer.vue";
 import apiUseDrawer from "@/components/autotest/api/use-drawer.vue";
@@ -148,7 +148,7 @@ import {ElMessage} from "element-plus";
 import Pagination from "@/components/pagination.vue";
 import toClipboard from "@/utils/copy-to-memory";
 import {arrayToTree} from "@/utils/parse-data";
-import {ChangeStepElement} from "@/api/business-api/step";
+import {ChangeStepElement} from "@/api/autotest/step";
 
 const props = defineProps({
   testType: {

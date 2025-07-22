@@ -41,7 +41,7 @@
 <script lang="ts" setup>
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
-import {PostModule} from "@/api/business-api/module";
+import {PostModule} from "@/api/autotest/module";
 import {bus, busEvent} from "@/utils/bus-events";
 import {Help} from "@icon-park/vue-next";
 import oneColumnRow from "@/components/input/one-column-row.vue";

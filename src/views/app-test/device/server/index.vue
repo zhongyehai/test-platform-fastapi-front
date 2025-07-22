@@ -117,7 +117,7 @@ import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
 import {appiumServerRequestStatusMappingContent, appiumServerRequestStatusMappingTagType} from "@/components/autotest/mapping";
-import {ChangeServerSort, CopyServer, DeleteServer, GetServerList, RunServer} from "@/api/business-api/device-server";
+import {ChangeServerSort, CopyServer, DeleteServer, GetServerList, RunServer} from "@/api/autotest/device-server";
 import {GetConfigByCode} from "@/api/config/config-value";
 import {Help, SortThree} from "@icon-park/vue-next";
 

@@ -326,7 +326,7 @@
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {Help} from "@icon-park/vue-next";
-import {GetApi, GetApiFrom} from "@/api/business-api/api";
+import {GetApi, GetApiFrom} from "@/api/autotest/api";
 import {bus, busEvent} from "@/utils/bus-events";
 import skipIfView from '@/components/input/skip-if.vue'
 import headersView from '@/components/input/key-value-row.vue'
@@ -337,7 +337,7 @@ import bodyView from '@/components/input/api-body.vue'
 import jsonEditorView from '@/components/editor/json-editor.vue'
 
 import {ElMessage} from "element-plus";
-import {GetStep, PostStep, PutStep} from "@/api/business-api/step";
+import {GetStep, PostStep, PutStep} from "@/api/autotest/step";
 import oneColumnRow from "@/components/input/one-column-row.vue";
 
 const props = defineProps({

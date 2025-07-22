@@ -150,12 +150,12 @@ import pageIndex from "@/components/autotest/page/index.vue";
 // import selectRunEnv from "@/components/select-run-env.vue"
 // import showRunProcess from "@/components/show-run-process.vue"
 
-import {GetProjectList, GetProject} from '@/api/business-api/project'
-import {GetModuleList, DeleteModule} from '@/api/business-api/module'
+import {GetProjectList, GetProject} from '@/api/autotest/project'
+import {GetModuleList, DeleteModule} from '@/api/autotest/module'
 import {bus, busEvent} from "@/utils/bus-events";
 import {arrayToTree, ellipsis} from "@/utils/parse-data";
 import {ElMessage, ElMessageBox, ElTree} from "element-plus";
-import {GetApiFrom, GetApiToStep} from "@/api/business-api/api";
+import {GetApiFrom, GetApiToStep} from "@/api/autotest/api";
 import {GetConfigByCode} from "@/api/config/config-value";
 
 const props = defineProps({

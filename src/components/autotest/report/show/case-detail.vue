@@ -202,7 +202,7 @@
 <script setup lang="ts">
 import {Help} from "@icon-park/vue-next";
 import skipIfView from '@/components/input/skip-if.vue'
-import {GetReportCaseDetail} from "@/api/business-api/report";
+import {GetReportCaseDetail} from "@/api/autotest/report";
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
 

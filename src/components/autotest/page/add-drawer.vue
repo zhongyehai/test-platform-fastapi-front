@@ -139,7 +139,7 @@
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {Clear, Copy, Help, Minus, Plus, SortThree} from "@icon-park/vue-next";
-import {PostPage} from "@/api/business-api/page";
+import {PostPage} from "@/api/autotest/page";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage, ElTree} from "element-plus";
 

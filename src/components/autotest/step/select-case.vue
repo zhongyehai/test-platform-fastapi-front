@@ -143,7 +143,7 @@
 
 import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 import {Help} from "@icon-park/vue-next";
-import {GetProjectList} from "@/api/business-api/project";
+import {GetProjectList} from "@/api/autotest/project";
 import showCaseDesc from '../case/show-desc.vue'
 import expandStep from './expand-step.vue'
 import {bus, busEvent} from "@/utils/bus-events";
@@ -152,9 +152,9 @@ import {ElMessage} from "element-plus";
 import Pagination from "@/components/pagination.vue";
 import toClipboard from "@/utils/copy-to-memory";
 import {arrayToTree} from "@/utils/parse-data";
-import {GetCaseSuiteList} from "@/api/business-api/case-suite";
-import {CopyCaseStep, GetCaseList} from "@/api/business-api/case";
-import {CopyStep, GetStepList, PostStep} from "@/api/business-api/step";
+import {GetCaseSuiteList} from "@/api/autotest/case-suite";
+import {CopyCaseStep, GetCaseList} from "@/api/autotest/case";
+import {CopyStep, GetStepList, PostStep} from "@/api/autotest/step";
 
 const props = defineProps({
   testType: {

@@ -229,7 +229,7 @@ import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
 import {swaggerPullStatusMappingContent, swaggerPullStatusMappingTagType} from "@/components/autotest/mapping";
 import {GetBusinessList} from "@/api/config/business";
-import {ChangeProjectSort, DeleteProject, GetProjectList} from "@/api/business-api/project";
+import {ChangeProjectSort, DeleteProject, GetProjectList} from "@/api/autotest/project";
 import {Help, SortThree} from "@icon-park/vue-next";
 
 const props = defineProps({

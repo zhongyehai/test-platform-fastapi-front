@@ -247,9 +247,9 @@ import ReportTable from '../report/report-table.vue'
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
-import {GetCaseList, DeleteCase, ChangeCaseSort, ChangeCaseStatus, CopyCase, RunCase} from "@/api/business-api/case";
+import {GetCaseList, DeleteCase, ChangeCaseSort, ChangeCaseStatus, CopyCase, RunCase} from "@/api/autotest/case";
 import {GetUserList} from "@/api/system/user";
-import {GetProject} from "@/api/business-api/project";
+import {GetProject} from "@/api/autotest/project";
 
 const props = defineProps({
   testType: {

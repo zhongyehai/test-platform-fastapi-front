@@ -328,12 +328,12 @@ import {bus, busEvent} from "@/utils/bus-events";
 import {GetRunEnvList} from "@/api/config/run-env";
 import {appiumServerRequestStatusMappingContent} from "@/components/autotest/mapping";
 import {GetConfigTypeList} from "@/api/config/config-type";
-import {GetTask, PostTask, PutTask, RunTask} from "@/api/business-api/task";
-import {GetCaseSuiteList} from "@/api/business-api/case-suite";
+import {GetTask, PostTask, PutTask, RunTask} from "@/api/autotest/task";
+import {GetCaseSuiteList} from "@/api/autotest/case-suite";
 import {arrayToTree} from "@/utils/parse-data";
-import {GetCaseList} from "@/api/business-api/case";
-import {GetServerList} from "@/api/business-api/device-server";
-import {GetPhoneList} from "@/api/business-api/device-phone";
+import {GetCaseList} from "@/api/autotest/case";
+import {GetServerList} from "@/api/autotest/device-server";
+import {GetPhoneList} from "@/api/autotest/device-phone";
 import {GetWebHookList} from "@/api/config/webhook";
 
 const props = defineProps({

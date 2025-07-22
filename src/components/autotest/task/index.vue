@@ -263,7 +263,7 @@ import {Help, Plus, SortThree} from "@icon-park/vue-next";
 import Pagination from '@/components/pagination.vue'
 import EditDrawer from './drawer.vue'
 
-import {GetProject, GetProjectList} from "@/api/business-api/project";
+import {GetProject, GetProjectList} from "@/api/autotest/project";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage, ElTree} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
@@ -275,8 +275,8 @@ import {
   EnableTask,
   GetTaskList,
   RunTask
-} from "@/api/business-api/task";
-import {RunCase} from "@/api/business-api/case";
+} from "@/api/autotest/task";
+import {RunCase} from "@/api/autotest/case";
 // import SelectRunEnv from "@/components/select-run-env.vue";
 // import ShowRunProcess from "@/components/show-run-process.vue";
 import {GetUserList} from "@/api/system/user";

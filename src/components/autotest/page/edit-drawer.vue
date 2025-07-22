@@ -66,7 +66,7 @@
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {Plus, Upload} from "@icon-park/vue-next";
-import {GetPage, PutPage} from "@/api/business-api/page";
+import {GetPage, PutPage} from "@/api/autotest/page";
 import elementIndexView from "../element/index.vue";
 import {bus, busEvent} from "@/utils/bus-events";
 

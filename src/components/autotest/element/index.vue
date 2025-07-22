@@ -121,8 +121,8 @@ import AddDrawer from './add-drawer.vue'
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
-import {GetElementList, DeleteElement, ChangeElementSort} from "@/api/business-api/element";
-import {GetPhoneList} from "@/api/business-api/device-phone";
+import {GetElementList, DeleteElement, ChangeElementSort} from "@/api/autotest/element";
+import {GetPhoneList} from "@/api/autotest/device-phone";
 
 const props = defineProps({
   testType: {

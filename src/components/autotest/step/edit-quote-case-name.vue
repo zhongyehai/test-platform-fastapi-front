@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
-import {GetStep, PutStep} from "@/api/business-api/step";
+import {GetStep, PutStep} from "@/api/autotest/step";
 import {bus, busEvent} from "@/utils/bus-events";
 
 const props = defineProps({

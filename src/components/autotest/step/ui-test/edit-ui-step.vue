@@ -329,8 +329,8 @@ import validatesView from '@/components/input/validates.vue'
 import jsonEditorView from '@/components/editor/json-editor.vue'
 import oneColumnRow from "@/components/input/one-column-row.vue";
 
-import {ChangeElementById, GetElement, GetElementFrom, GetElementList} from "@/api/business-api/element";
-import {GetKeyBoardCodeMappingList, GetStep, PostStep, PutStep} from "@/api/business-api/step";
+import {ChangeElementById, GetElement, GetElementFrom, GetElementList} from "@/api/autotest/element";
+import {GetKeyBoardCodeMappingList, GetStep, PostStep, PutStep} from "@/api/autotest/step";
 import {GetConfigByCode} from "@/api/config/config-value";
 
 const props = defineProps({

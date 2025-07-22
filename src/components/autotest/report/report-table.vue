@@ -166,8 +166,17 @@
           prop="desc"
           align="center"
           label="操作"
-          width="110">
+          width="150">
         <template #default="scope">
+          <el-button
+              v-show="scope.row.run_type === 'task' && scope.row.notified === false"
+              type="text"
+              size="small"
+              style="margin: 0; padding: 2px"
+              @click.native="notifyReport(scope.row)"
+          >通知
+          </el-button>
+
           <el-button
               v-show="scope.row.run_type !== 'api' || isAdmin"
               type="text"
@@ -238,7 +247,7 @@
 import {onMounted, ref, onBeforeUnmount, watch, nextTick, computed} from "vue";
 import Pagination from '@/components/pagination.vue'
 
-import {GetProject, GetProjectList} from "@/api/business-api/project";
+import {GetProject, GetProjectList} from "@/api/autotest/project";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
@@ -246,19 +255,19 @@ import {
   DeleteReport,
   GetReport,
   GetReportCaseFailedList,
-  GetReportList
-} from "@/api/business-api/report";
+  GetReportList, NotifyReport
+} from "@/api/autotest/report";
 import {reportStatusMappingContent, reportStatusMappingTagType, reportTriggerTypeMappingContent} from "../mapping";
 import {GetRunEnvList} from "@/api/config/run-env";
 import {GetConfigByCode} from "@/api/config/config-value";
 import SelectRunEnv from "@/components/select-run-env.vue";
 import ShowRunProcess from "@/components/show-run-process.vue";
-import {GetCase, RunCase} from "@/api/business-api/case";
-import {GetServerList} from "@/api/business-api/device-server";
-import {GetPhoneList} from "@/api/business-api/device-phone";
-import {RunTask} from "@/api/business-api/task";
-import {RunCaseSuite} from "@/api/business-api/case-suite";
-import {RunApi} from "@/api/business-api/api";
+import {GetCase, RunCase} from "@/api/autotest/case";
+import {GetServerList} from "@/api/autotest/device-server";
+import {GetPhoneList} from "@/api/autotest/device-phone";
+import {RunTask} from "@/api/autotest/task";
+import {RunCaseSuite} from "@/api/autotest/case-suite";
+import {RunApi} from "@/api/autotest/api";
 import {paramsISOTime} from "@/utils/parse-data";
 
 const props = defineProps({
@@ -377,6 +386,10 @@ const sendReRun = (tempRunArgs: any) => {
 const showReRunDialog = (row: {}) => {
   report.value = row
   reRunDialogIsShow.value = true
+}
+
+const notifyReport = (row: {id: number}) => {
+  NotifyReport(props.testType, {id: row.id}).then(response => {})
 }
 
 const clickReRun = (type: string) => {

@@ -186,7 +186,7 @@ import {bus, busEvent} from "@/utils/bus-events";
 import {GetHitList, GetHitTypeList, DeleteHit} from "@/api/assist/hit";
 import {GetConfigByCode} from "@/api/config/config-value";
 import {GetRunEnvList} from "@/api/config/run-env";
-import {GetProjectList} from "@/api/business-api/project";
+import {GetProjectList} from "@/api/autotest/project";
 import {GetUserList} from "@/api/system/user";
 
 const tableIsLoading = ref(false)

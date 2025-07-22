@@ -51,8 +51,8 @@
 <script lang="ts" setup>
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
-import {GetCaseSuiteList, ChangeCaseSuiteSort} from "@/api/business-api/case-suite";
-import {GetModuleList, ChangeModuleSort} from "@/api/business-api/module";
+import {GetCaseSuiteList, ChangeCaseSuiteSort} from "@/api/autotest/case-suite";
+import {GetModuleList, ChangeModuleSort} from "@/api/autotest/module";
 import {Help, SortThree} from "@icon-park/vue-next";
 
 const props = defineProps({

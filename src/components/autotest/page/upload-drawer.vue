@@ -32,7 +32,7 @@
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
-import {DownloadElementTemplate, getUploadDir, UploadElement} from "@/api/business-api/element";
+import {DownloadElementTemplate, getUploadDir, UploadElement} from "@/api/autotest/element";
 
 const props = defineProps({
   testType: {

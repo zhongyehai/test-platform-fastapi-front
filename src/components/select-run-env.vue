@@ -259,8 +259,8 @@ import {appiumServerRequestStatusMappingContent} from "@/components/autotest/map
 import {getRunTimeout} from "@/utils/get-config";
 import {GetRunEnvList} from "@/api/config/run-env";
 import {GetConfigByCode} from "@/api/config/config-value";
-import {GetPhoneList} from "@/api/business-api/device-phone";
-import {GetServerList} from "@/api/business-api/device-server";
+import {GetPhoneList} from "@/api/autotest/device-phone";
+import {GetServerList} from "@/api/autotest/device-server";
 
 
 const props = defineProps({

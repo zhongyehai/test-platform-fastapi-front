@@ -1,7 +1,7 @@
 import { GetConfigByCode, GetFindElementBy } from '@/api/config/config-value'
 import {busEvent} from "@/utils/bus-events";
-import {GetAssertMappingList, GetExtractMappingList} from "@/api/business-api/step";
-// import { GetAssertMapping, GetExtractMapping } from '@/api/business-api/step'
+import {GetAssertMappingList, GetExtractMappingList} from "@/api/autotest/step";
+// import { GetAssertMapping, GetExtractMapping } from '@/api/autotest/step'
 // import { assertMappingList, extractMappingList } from '@/apis/webUiTest/step'
 
 // 获取配置的运行等待超时时间

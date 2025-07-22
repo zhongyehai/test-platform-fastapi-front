@@ -193,8 +193,8 @@ import {onBeforeUnmount, onMounted, ref} from "vue";
 import {Help, SortThree} from "@icon-park/vue-next";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
-import {GetProject} from "@/api/business-api/project";
-import {PostElement} from "@/api/business-api/element";
+import {GetProject} from "@/api/autotest/project";
+import {PostElement} from "@/api/autotest/element";
 import {Clear, Copy, Minus, Plus} from "@icon-park/vue-next";
 
 const props = defineProps({

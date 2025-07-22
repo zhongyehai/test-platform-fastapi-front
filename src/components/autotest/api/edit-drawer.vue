@@ -237,7 +237,7 @@
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {Help, Plus} from "@icon-park/vue-next";
-import {GetApi, PutApi, RunApi} from "@/api/business-api/api";
+import {GetApi, PutApi, RunApi} from "@/api/autotest/api";
 import {bus, busEvent} from "@/utils/bus-events";
 import headersView from '@/components/input/key-value-row.vue'
 import queryStringView from '@/components/input/key-value-row.vue'

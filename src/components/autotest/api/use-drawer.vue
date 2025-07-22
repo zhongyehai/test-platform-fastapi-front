@@ -75,7 +75,7 @@ import {Help} from "@icon-park/vue-next";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
-import {ChangeCaseStatus} from "@/api/business-api/case";
+import {ChangeCaseStatus} from "@/api/autotest/case";
 
 const drawerIsShow = ref(false)
 const showApiUseRef = ref(null)

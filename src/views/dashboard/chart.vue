@@ -6,7 +6,7 @@
 import {echarts, themeName} from '@/components/echarts/echarts'
 import {ref, onMounted, onBeforeUnmount, computed } from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
-import {getDetailCount} from "@/api/business-api/dashboard";
+import {getDetailCount} from "@/api/autotest/dashboard";
 
 const option = ref({
   title: {

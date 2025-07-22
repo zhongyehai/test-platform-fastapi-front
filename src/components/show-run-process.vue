@@ -238,7 +238,7 @@ import {
   GetReportStatus,
   GetReportStepDetail,
   GetReportStepList
-} from "@/api/business-api/report";
+} from "@/api/autotest/report";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElNotification} from "element-plus";
 import showStepView from '@/components/autotest/report/show/step-detail.vue'

@@ -195,9 +195,9 @@
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {Help} from "@icon-park/vue-next";
 import {bus, busEvent} from "@/utils/bus-events";
-import {GetProject, PostProject, PutProject} from "@/api/business-api/project";
+import {GetProject, PostProject, PutProject} from "@/api/autotest/project";
 import {GetScriptList} from "@/api/assist/script";
-import {GetPhoneList} from "@/api/business-api/device-phone";
+import {GetPhoneList} from "@/api/autotest/device-phone";
 
 const props = defineProps({
   testType: {

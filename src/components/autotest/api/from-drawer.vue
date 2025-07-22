@@ -135,8 +135,8 @@ import {Help} from "@icon-park/vue-next";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
-import {ChangeApiLevel, ChangeApiStatus, GetApiToStep} from "@/api/business-api/api";
-import {ChangeStepElement} from "@/api/business-api/step";
+import {ChangeApiLevel, ChangeApiStatus, GetApiToStep} from "@/api/autotest/api";
+import {ChangeStepElement} from "@/api/autotest/step";
 
 const props = defineProps({
   caseId: {

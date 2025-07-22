@@ -54,7 +54,7 @@
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
-import {GetProject, PostProject, PutProject, SynchronizationProjectEnv} from "@/api/business-api/project";
+import {GetProject, PostProject, PutProject, SynchronizationProjectEnv} from "@/api/autotest/project";
 
 const props = defineProps({
   testType: {

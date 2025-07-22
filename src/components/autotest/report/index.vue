@@ -53,7 +53,7 @@ import {onMounted, ref, watch, nextTick, computed} from "vue";
 
 import ReportTable from './report-table.vue'
 
-import {GetProjectList} from "@/api/business-api/project";
+import {GetProjectList} from "@/api/autotest/project";
 import {GetUserList} from "@/api/system/user";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElTree} from "element-plus";

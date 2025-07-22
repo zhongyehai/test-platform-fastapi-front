@@ -433,7 +433,7 @@
 import {onMounted, ref, watch} from "vue";
 import {busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
-import {GetExtractMappingList} from "@/api/business-api/step";
+import {GetExtractMappingList} from "@/api/autotest/step";
 import {Clear, Copy, Help, Minus, Plus, SortThree} from "@icon-park/vue-next";
 
 const props = defineProps({

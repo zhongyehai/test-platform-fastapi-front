@@ -17,7 +17,7 @@
 import {onMounted, ref} from "vue";
 import Card from '@/components/card/index.vue'
 import overviewChart from './chart.vue'
-import {GetUseCard, GetUseChart} from "@/api/business-api/stat";
+import {GetUseCard, GetUseChart} from "@/api/autotest/stat";
 
 const timeSlot = ref('近7天')
 const timeSlotMapping = {'近7天': -7, '近14天': -14, '近30天': -30, '近90天': -90, '近180天': -180, '近360天': -360}

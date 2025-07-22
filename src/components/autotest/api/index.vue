@@ -217,11 +217,11 @@ import {
   DeleteApi,
   ChangeApiSort,
   RunApi
-} from "@/api/business-api/api";
+} from "@/api/autotest/api";
 import {Plus, Help, SortThree} from "@icon-park/vue-next";
 import {GetUserList} from "@/api/system/user";
 import ReportTable from "@/components/autotest/report/report-table.vue";
-import {GetProject} from "@/api/business-api/project";
+import {GetProject} from "@/api/autotest/project";
 
 const tableIsLoading = ref(false)
 const reportTableIsShow = ref(false)

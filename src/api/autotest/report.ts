@@ -16,6 +16,10 @@ export function GetReportList(testType: string, params: object) {
     return request({ url: getBaseDir(testType) + '/list', method: 'get', params: params })
 }
 
+export function NotifyReport(testType: string, data: object) {
+    return request({ url: getBaseDir(testType) + '/notify', method: 'post', data: data })
+}
+
 export function GetReportStatus(testType: string, params: object) {
     return request({ url: getBaseDir(testType) + '/status', method: 'get', data: null, params: params })
 }

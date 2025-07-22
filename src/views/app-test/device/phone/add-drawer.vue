@@ -157,7 +157,7 @@ import {onBeforeUnmount, onMounted, ref} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage, ElTree} from "element-plus";
 import {Clear, Copy, Help, Minus, Plus, SortThree} from "@icon-park/vue-next";
-import {PostPhone} from "@/api/business-api/device-phone";
+import {PostPhone} from "@/api/autotest/device-phone";
 
 const props = defineProps({
   deviceList: {

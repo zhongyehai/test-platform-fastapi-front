@@ -121,7 +121,7 @@ import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
 import {GetConfigByCode} from "@/api/config/config-value";
-import {ChangePhoneSort, CopyPhone, DeletePhone, GetPhoneList} from "@/api/business-api/device-phone";
+import {ChangePhoneSort, CopyPhone, DeletePhone, GetPhoneList} from "@/api/autotest/device-phone";
 
 const phoneTableRef = ref(null)
 const tableIsLoading = ref(false)

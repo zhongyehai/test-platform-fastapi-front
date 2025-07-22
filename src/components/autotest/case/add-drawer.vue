@@ -121,7 +121,7 @@ import {onBeforeUnmount, onMounted, ref} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import {Clear, Copy, Help, Minus, Plus, SortThree} from "@icon-park/vue-next";
-import {PostCase} from "@/api/business-api/case";
+import {PostCase} from "@/api/autotest/case";
 
 const props = defineProps({
   testType: {

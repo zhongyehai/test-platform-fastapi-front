@@ -114,7 +114,7 @@
 import {ref, watch, nextTick, computed} from "vue";
 import {Delete, Help, Plus, SortThree, Write} from "@icon-park/vue-next";
 import showCaseDesc from '@/components/autotest/case/show-desc.vue'
-import {GetCaseList} from "@/api/business-api/case";
+import {GetCaseList} from "@/api/autotest/case";
 import {ElTree} from "element-plus";
 
 const props = defineProps({

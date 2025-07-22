@@ -266,9 +266,9 @@ import {GetConfigByCode} from "@/api/config/config-value";
 import {busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import {GetRunEnvList} from "@/api/config/run-env";
-import {GetServerList} from "@/api/business-api/device-server";
-import {GetPhoneList} from "@/api/business-api/device-phone";
-import {GetProject} from "@/api/business-api/project";
+import {GetServerList} from "@/api/autotest/device-server";
+import {GetPhoneList} from "@/api/autotest/device-phone";
+import {GetProject} from "@/api/autotest/project";
 import {Clear, Copy, Help, Minus, Plus, SortThree} from "@icon-park/vue-next";
 
 const props = defineProps({

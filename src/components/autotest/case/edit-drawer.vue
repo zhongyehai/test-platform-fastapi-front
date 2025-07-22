@@ -167,10 +167,10 @@ import skipIfView from '@/components/input/skip-if.vue'
 import stepIndexView from '@/components/autotest/step/index.vue'
 import {bus, busEvent} from "@/utils/bus-events";
 import {GetConfigByCode, GetSkipIfDataSourceMapping} from "@/api/config/config-value";
-import {GetCase, GetCaseFrom, PutCase, RunCase} from "@/api/business-api/case";
+import {GetCase, GetCaseFrom, PutCase, RunCase} from "@/api/autotest/case";
 import {GetScriptList} from "@/api/assist/script";
 import {getFindElementOption, getUiAssertMappingList} from "@/utils/get-config";
-import {GetExecuteMappingList, GetExtractMappingList, GetKeyBoardCodeMappingList} from "@/api/business-api/step";
+import {GetExecuteMappingList, GetExtractMappingList, GetKeyBoardCodeMappingList} from "@/api/autotest/step";
 import {ElMessage} from "element-plus";
 
 const props = defineProps({

@@ -208,7 +208,7 @@ import {
   ReportAsCase,
   ChangeReportStepStatus,
   GetReportCaseFailedList
-} from "@/api/business-api/report";import {GetProject} from "@/api/business-api/project";
+} from "@/api/autotest/report";import {GetProject} from "@/api/autotest/project";
 import {GetRunEnvList} from "@/api/config/run-env";
 import {bus, busEvent} from "@/utils/bus-events";
 
@@ -218,12 +218,12 @@ import showCaseAndStepListView from './case-and-step-list.vue'
 import selectRunEnv from "@/components/select-run-env.vue";
 import showRunProcess from "@/components/show-run-process.vue";
 import pythonScriptIndex from '@/views/assist/script/index.vue'
-import {GetServerList} from "@/api/business-api/device-server";
-import {GetPhoneList} from "@/api/business-api/device-phone";
-import {GetCase, GetCaseFromProject, RunCase} from "@/api/business-api/case";
-import {RunTask} from "@/api/business-api/task";
-import {RunCaseSuite} from "@/api/business-api/case-suite";
-import {RunApi} from "@/api/business-api/api";
+import {GetServerList} from "@/api/autotest/device-server";
+import {GetPhoneList} from "@/api/autotest/device-phone";
+import {GetCase, GetCaseFromProject, RunCase} from "@/api/autotest/case";
+import {RunTask} from "@/api/autotest/task";
+import {RunCaseSuite} from "@/api/autotest/case-suite";
+import {RunApi} from "@/api/autotest/api";
 import {paramsISOTime} from "@/utils/parse-data";
 
 const props = defineProps({

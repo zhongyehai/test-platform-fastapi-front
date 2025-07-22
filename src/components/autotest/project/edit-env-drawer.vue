@@ -145,7 +145,7 @@ import synchronizeEnvView from "./synchronize-env.vue";
 import {bus, busEvent} from "@/utils/bus-events";
 import variablesView from '@/components/input/variables.vue'
 import headersView from '@/components/input/key-value-row.vue'
-import {GetProjectEnv, PutProjectEnv} from "@/api/business-api/project";
+import {GetProjectEnv, PutProjectEnv} from "@/api/autotest/project";
 import {GetRunEnvList} from "@/api/config/run-env";
 import {ElMessage, ElTree} from "element-plus";
 import {Help} from "@icon-park/vue-next";

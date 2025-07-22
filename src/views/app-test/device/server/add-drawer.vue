@@ -151,7 +151,7 @@
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
-import {PostServer} from "@/api/business-api/device-server";
+import {PostServer} from "@/api/autotest/device-server";
 import {Clear, Copy, Help, Minus, Plus, SortThree} from "@icon-park/vue-next";
 
 const props = defineProps({

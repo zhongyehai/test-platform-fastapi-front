@@ -127,12 +127,12 @@ import uploadDrawer from "./upload-drawer.vue";
 import sortDrawer from "../sort-drawer.vue";
 import caseIndex from "@/components/autotest/case/index.vue";
 
-import {GetProjectList, GetProject} from '@/api/business-api/project'
+import {GetProjectList, GetProject} from '@/api/autotest/project'
 import {bus, busEvent} from "@/utils/bus-events";
 import {arrayToTree, ellipsis} from "@/utils/parse-data";
 import {ElMessageBox, ElTree} from "element-plus";
 import {Plus, UploadOne, Write, Delete, SortThree, Help} from "@icon-park/vue-next";
-import {GetCaseSuiteList, DeleteCaseSuite} from "@/api/business-api/case-suite";
+import {GetCaseSuiteList, DeleteCaseSuite} from "@/api/autotest/case-suite";
 import {GetConfigByCode} from "@/api/config/config-value";
 // import selectRunEnv from "@/components/select-run-env.vue";
 // import showRunProcess from "@/components/show-run-process.vue";

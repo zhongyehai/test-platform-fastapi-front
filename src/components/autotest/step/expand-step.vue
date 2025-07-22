@@ -135,8 +135,8 @@ import showCaseDesc from '../case/show-desc.vue'
 import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
-import {ChangeStepStatus, DeleteStep, GetStepList, CopyStep} from "@/api/business-api/step";
-import {CopyCaseStep} from "@/api/business-api/case";
+import {ChangeStepStatus, DeleteStep, GetStepList, CopyStep} from "@/api/autotest/step";
+import {CopyCaseStep} from "@/api/autotest/case";
 
 const props = defineProps({
   testType: {

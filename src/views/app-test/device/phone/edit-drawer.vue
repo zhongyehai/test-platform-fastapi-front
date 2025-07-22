@@ -88,7 +88,7 @@ import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 import {Help} from "@icon-park/vue-next";
 import jsonEditorView from '@/components/editor/json-editor.vue'
 import {bus, busEvent} from "@/utils/bus-events";
-import {GetPhone, PutPhone} from "@/api/business-api/device-phone";
+import {GetPhone, PutPhone} from "@/api/autotest/device-phone";
 
 const jsonEditorStyle = computed(() => {
   return {

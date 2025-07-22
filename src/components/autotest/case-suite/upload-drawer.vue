@@ -54,9 +54,9 @@
 <script lang="ts" setup>
 
 import {onBeforeUnmount, onMounted, ref} from "vue";
-import {DownloadSuiteTemplate, UploadCaseSuite} from "@/api/business-api/case-suite";
+import {DownloadSuiteTemplate, UploadCaseSuite} from "@/api/autotest/case-suite";
 import {bus, busEvent} from "@/utils/bus-events";
-import {getUploadDir} from "@/api/business-api/case-suite";
+import {getUploadDir} from "@/api/autotest/case-suite";
 
 const props = defineProps({
   testType: {

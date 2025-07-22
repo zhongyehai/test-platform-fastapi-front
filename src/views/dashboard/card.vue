@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import Row from '@/components/card/index.vue'
 import {onMounted, ref} from 'vue'
-import {getTitleCount} from "@/api/business-api/dashboard";
+import {getTitleCount} from "@/api/autotest/dashboard";
 import {bus, busEvent} from "@/utils/bus-events";
 
 const title_list = ref([])

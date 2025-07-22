@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import countChart from './chart.vue'
-import {GetAnalyseChart} from "@/api/business-api/stat";
+import {GetAnalyseChart} from "@/api/autotest/stat";
 import {GetBusinessList} from "@/api/config/business";
 
 

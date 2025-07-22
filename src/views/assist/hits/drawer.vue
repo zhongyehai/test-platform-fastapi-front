@@ -105,7 +105,7 @@
 <script lang="ts" setup>
 import {onBeforeUnmount, onMounted, ref, watch} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
-import {GetProjectList} from "@/api/business-api/project";
+import {GetProjectList} from "@/api/autotest/project";
 import {GetHit, GetHitTypeList, PostHit, PutHit} from "@/api/assist/hit";
 import {GetConfigByCode} from "@/api/config/config-value";
 import {GetRunEnvList} from "@/api/config/run-env";

@@ -128,7 +128,7 @@ import {bus, busEvent} from "@/utils/bus-events";
 import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
 import { getFindElementOption } from '@/utils/get-config'
-import {GetPageList, DeletePage, ChangePageSort, CopyPage} from "@/api/business-api/page";
+import {GetPageList, DeletePage, ChangePageSort, CopyPage} from "@/api/autotest/page";
 
 const props = defineProps({
   testType: {

@@ -68,7 +68,7 @@
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {Help} from "@icon-park/vue-next";
 import {bus, busEvent} from "@/utils/bus-events";
-import {GetServer, PutServer} from "@/api/business-api/device-server";
+import {GetServer, PutServer} from "@/api/autotest/device-server";
 
 
 onMounted(() => {
