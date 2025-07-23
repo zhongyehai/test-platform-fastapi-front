@@ -63,7 +63,7 @@ const setTableHeight = () => {
   if (window.innerHeight < 800){  // 小屏
     tableHeight.value = `${window.innerHeight * 0.738}px`
   }else {  // 大屏
-    tableHeight.value =  `${window.innerHeight * 0.86}px`
+    tableHeight.value =  `${window.innerHeight * 0.8}px`
   }
 }
 

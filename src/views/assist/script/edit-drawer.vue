@@ -80,7 +80,7 @@
       <pythonEditor ref="pythonEditorRef" :python-code="formData.script_data"></pythonEditor>
 
       <template #footer>
-        <div slot="footer" class="dialog-footer">
+        <div style="flex: auto">
           <el-button size="small" @click="drawerIsShow = false"> {{ '取消' }}</el-button>
           <el-button
               type="primary"
