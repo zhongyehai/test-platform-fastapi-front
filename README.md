@@ -21,6 +21,14 @@ npm run build
 
 ## 后端传送门：https://github.com/zhongyehai/test-platform-fastapi-api
 
+### QQ交流群：249728408
+
+### 博客地址：https://www.cnblogs.com/zhongyehai/
+
+### 微信群
+![微信群](img/weixin/weixin.png)
+
+
 ## 项目关键截图
 
 #### 选择运行环境

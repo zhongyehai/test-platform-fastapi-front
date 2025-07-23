@@ -168,14 +168,17 @@
           label="操作"
           width="150">
         <template #default="scope">
-          <el-button
-              v-show="scope.row.run_type === 'task' && scope.row.notified === false"
-              type="text"
-              size="small"
-              style="margin: 0; padding: 2px"
-              @click.native="notifyReport(scope.row)"
-          >通知
-          </el-button>
+          <el-popconfirm title="确定把此报告的运行结果通知到对应任务的报告接收人吗？" @confirm="notifyReport(scope.row)">
+            <template #reference>
+              <el-button
+                  v-show="scope.row.process === 3 && scope.row.status === 2 && scope.row.run_type === 'task' && scope.row.notified === false"
+                  type="text"
+                  size="small"
+                  style="margin: 0; padding: 2px"
+              >通知
+              </el-button>
+            </template>
+          </el-popconfirm>
 
           <el-button
               v-show="scope.row.run_type !== 'api' || isAdmin"
@@ -389,7 +392,11 @@ const showReRunDialog = (row: {}) => {
 }
 
 const notifyReport = (row: {id: number}) => {
-  NotifyReport(props.testType, {id: row.id}).then(response => {})
+  tableIsLoading.value = true
+  NotifyReport(props.testType, {id: row.id}).then(response => {
+    tableIsLoading.value = false
+    getTableDataList()
+  })
 }
 
 const clickReRun = (type: string) => {
