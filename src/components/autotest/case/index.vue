@@ -31,7 +31,18 @@
             </template>
           </el-popconfirm>
 
+          <el-popconfirm width="250px" title="确定复制所选中的用例及其步骤?" @confirm="copyCase(null)">
+            <template #reference>
+              <el-button
+                  :disabled="selectedList.length < 1"
+                  type="primary"
+                  size="small">批量复制</el-button>
+            </template>
+          </el-popconfirm>
+
           <el-button :disabled="selectedList.length < 1" type="primary" size="small" @click="clickRun">批量运行</el-button>
+
+          <el-button :disabled="selectedList.length < 1" type="primary" size="small" @click="showChangeCaseParent">修改归属</el-button>
 
           <el-popconfirm width="350px" title="确定把所选用例状态改为【未调试-不执行】?" @confirm="changeCaseStatus(null, 0)">
             <template #reference>
@@ -68,8 +79,6 @@
                   size="small">批量改为调试不通过-不执行</el-button>
             </template>
           </el-popconfirm>
-
-          <el-button :disabled="selectedList.length < 1" type="primary" size="small" @click="showChangeCaseParent">修改归属</el-button>
 
           <el-table
               ref="caseTableRef"
@@ -436,7 +445,7 @@ const showEditDrawer = (command: string, row: any) => {
 
 const copyCase = (row: any) => {
   tableIsLoading.value = true
-  CopyCase(props.testType, {id: row.id}).then(response => {
+  CopyCase(props.testType, {id_list: getSubmitId(row)}).then(response => {
     tableIsLoading.value = false
     if (response){
       getTableDataList()
