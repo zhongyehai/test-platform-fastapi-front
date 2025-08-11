@@ -94,7 +94,7 @@
 
         <el-table-column show-overflow-tooltip label="触发日期" prop="date" align="center" min-width="10%">
           <template #default="scope">
-            <span> {{ scope.row.date }} </span>
+            <span> {{ paramsISOTime(scope.row.date) }} </span>
           </template>
         </el-table-column>
 
@@ -188,6 +188,7 @@ import {GetConfigByCode} from "@/api/config/config-value";
 import {GetRunEnvList} from "@/api/config/run-env";
 import {GetProjectList} from "@/api/autotest/project";
 import {GetUserList} from "@/api/system/user";
+import {paramsISOTime} from "@/utils/parse-data";
 
 const tableIsLoading = ref(false)
 const tableDataList = ref([])
