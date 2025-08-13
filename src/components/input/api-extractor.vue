@@ -8,9 +8,14 @@
         </template>
 
         <div style="margin-left: 20px">
-          <div style="margin-left: 20px; margin-bottom: 5px">
+          <div style="margin-left: 20px; margin-bottom: 5px;color:red">
             1、此处提取的数据只在运行时有效 <br>
-            2、若在此处设置的key与服务/用例设置的公共变量的一致，则会使用此处提取到的值
+            2、若在此处设置的key与服务/用例设置的公共变量的一致，则会使用此处提取到的值 <br>
+            3、若要在此处使用自定义函数，需要注意自定义函数的每一个传参如果是字母且不是要从响应体中提取，则需要以变量的形式传入 <br>
+            如： <br>
+            响应体为{"code":0, "a": 1} <br>
+            提取表达式: ${test(code,b)} => 错误，返回b提取失败 <br>
+            先定义或提取变量b，再提取表达式 ${test(code,$b)} => 执行函数逻辑 <br>
           </div>
           <div style="margin-left: 20px; margin-bottom: 5px">
             示例数据： {"status": 200, "data_list": [{"id": 1},{"id": 2}]}

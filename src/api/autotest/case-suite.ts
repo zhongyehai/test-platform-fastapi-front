@@ -43,3 +43,11 @@ export function RunCaseSuite(testType: string, data: object) {
 export function UploadCaseSuite(testType: string, data: object) {
     return request({ url: getBaseDir(testType) + '/upload', method: 'post', data: data })
 }
+
+export function ChangeCaseSuiteParent(testType: string, data: object) {
+    return request({ url: getBaseDir(testType) + '/parent', method: 'put', data: data })
+}
+
+export function CopyCaseSuite(testType: string, data: object) {
+    return request({ url: getBaseDir(testType) + '/copy', method: 'post', data: data })
+}

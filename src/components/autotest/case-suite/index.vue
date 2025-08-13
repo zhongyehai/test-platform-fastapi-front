@@ -85,6 +85,7 @@
                         <SortThree v-show="data.parent" style="color: #409EFF;margin: 0; padding: 2px" @click.stop="showSortDrawer(data)"></SortThree>
                         <Plus style="color: #409EFF;margin: 0; padding: 2px" @click.stop="showEditDrawer('add', node, data)"></Plus>
                         <Write style="color: #409EFF;margin: 0; padding: 2px" @click.stop="showEditDrawer('edit', node, data)"></Write>
+                        <Copy style="color: #409EFF;margin: 0; padding: 2px" @click.stop="showChangeParentDrawer('copy', node, data)"></Copy>
                         <Delete style="color: red;margin: 0; padding: 2px" @click.stop="clickDeleteModule(node, data)"></Delete>
                       </div>
                     </div>
@@ -113,7 +114,7 @@
 
 <!--      <selectRunEnv :test-type="testType" :business-id="project.business_id"></selectRunEnv>-->
 <!--      <showRunProcess :test-type="testType"></showRunProcess>-->
-
+    <change-suite-parent :test-type="testType" :project-id="project.id" :project-list="projectList"></change-suite-parent>
     </div>
   </div>
 </template>
@@ -131,9 +132,10 @@ import {GetProjectList, GetProject} from '@/api/autotest/project'
 import {bus, busEvent} from "@/utils/bus-events";
 import {arrayToTree, ellipsis} from "@/utils/parse-data";
 import {ElMessageBox, ElTree} from "element-plus";
-import {Plus, UploadOne, Write, Delete, SortThree, Help} from "@icon-park/vue-next";
+import {Plus, UploadOne, Write, Delete, SortThree, Copy} from "@icon-park/vue-next";
 import {GetCaseSuiteList, DeleteCaseSuite} from "@/api/autotest/case-suite";
 import {GetConfigByCode} from "@/api/config/config-value";
+import ChangeSuiteParent from "@/components/autotest/case-suite/change-suite-parent.vue";
 // import selectRunEnv from "@/components/select-run-env.vue";
 // import showRunProcess from "@/components/show-run-process.vue";
 
@@ -205,6 +207,18 @@ const showEditDrawer = (command: string, node: any, data: { name: any; controlle
     bus.emit(busEvent.drawerIsShow, {eventType: 'add-case-suite', content: {parent: data.id, suite_type: data.suite_type, project_id: project.value.id}})
   }else {
     bus.emit(busEvent.drawerIsShow, {eventType: 'edit-case-suite', content: JSON.parse(JSON.stringify(data))})
+  }
+}
+
+const showChangeParentDrawer = (command: string, node: any, data: { name: any; controller: any; }) => {
+  console.log(command)
+  console.log(node)
+  console.log(data)
+  if (command === 'copy'){
+    bus.emit(busEvent.drawerIsShow, {eventType: 'case-suite-parent', content: {parent: data.parent, id: data.id, project_id: project.value.id}})
+  }else {
+    // 修改用例集归属，暂不实现
+    // bus.emit(busEvent.drawerIsShow, {eventType: 'case-suite-parent', content: JSON.parse(JSON.stringify(data))})
   }
 }
 
