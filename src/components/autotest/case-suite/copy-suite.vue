@@ -34,6 +34,11 @@
               clearable
           />
         </el-form-item>
+
+        <el-form-item label="复制深度" prop="deep" class="required" size="small">
+          <el-radio v-model="formData.deep" :label="false">仅复制当前用例集及和当前用例集下的用例</el-radio>
+          <el-radio v-model="formData.deep" :label="true">复制当前用例集下的所有用例集和所有用例</el-radio>
+        </el-form-item>
       </el-form>
 
       <template #footer>
@@ -89,8 +94,9 @@ onBeforeUnmount(() => {
 })
 
 const onShowDrawerEvent = (message: any) => {
-  if (message.eventType === 'case-suite-parent') {
+  if (message.eventType === 'copy-case') {
     resetForm()
+    currentProjectId.value = props.projectId
     formData.value.project_id = props.projectId
     formData.value.id = message.content.id
     formData.value.parent = message.content.parent
@@ -105,13 +111,15 @@ const onTreeIsDone = (message: any) => {
 }
 
 const drawerIsShow = ref(false)
+const currentProjectId = ref()
 const submitButtonIsLoading = ref(false)
 const ruleFormRef = ref(null)
 const suiteTreeData = ref([])
 const formData = ref({
   project_id: undefined,
   id: undefined,
-  parent: undefined
+  parent: undefined,
+  deep: false
 })
 const formRules = {
   parent: [
@@ -122,14 +130,15 @@ const resetForm = () => {
   formData.value = {
     project_id: undefined,
     id: undefined,
-    parent: undefined
+    parent: undefined,
+    deep: true
   }
   ruleFormRef.value && ruleFormRef.value.resetFields();
   submitButtonIsLoading.value = false
 }
 
-const sendEvent = () => {
-  bus.emit(busEvent.drawerIsCommit, {eventType: 'case-editor'});
+const sendEvent = (needRefresh) => {
+  bus.emit(busEvent.drawerIsCommit, {eventType: 'copy-suite', needRefresh: needRefresh});
 }
 
 const getCaseSuiteList = (projectId: number) => {
@@ -144,10 +153,11 @@ const submit = () => {
     if (valid) {
       const parent = formData.value.parent.slice(-1)[0]
       submitButtonIsLoading.value = true
-      CopyCaseSuite(props.testType, {parent: parent, id: formData.value.id}).then(response => {
+      CopyCaseSuite(props.testType, {parent: parent, id: formData.value.id, deep: formData.value.deep}).then(response => {
         submitButtonIsLoading.value = false
         if (response) {
-          sendEvent()
+          // 如果是本项目复制到本项目，则需要自动刷新
+          sendEvent(currentProjectId.value === formData.value.project_id)
           drawerIsShow.value = false
         }
       })

@@ -114,7 +114,7 @@
 
 <!--      <selectRunEnv :test-type="testType" :business-id="project.business_id"></selectRunEnv>-->
 <!--      <showRunProcess :test-type="testType"></showRunProcess>-->
-    <change-suite-parent :test-type="testType" :project-id="project.id" :project-list="projectList"></change-suite-parent>
+    <copy-suite :test-type="testType" :project-id="project.id" :project-list="projectList"></copy-suite>
     </div>
   </div>
 </template>
@@ -135,7 +135,7 @@ import {ElMessageBox, ElTree} from "element-plus";
 import {Plus, UploadOne, Write, Delete, SortThree, Copy} from "@icon-park/vue-next";
 import {GetCaseSuiteList, DeleteCaseSuite} from "@/api/autotest/case-suite";
 import {GetConfigByCode} from "@/api/config/config-value";
-import ChangeSuiteParent from "@/components/autotest/case-suite/change-suite-parent.vue";
+import CopySuite from "@/components/autotest/case-suite/copy-suite.vue";
 // import selectRunEnv from "@/components/select-run-env.vue";
 // import showRunProcess from "@/components/show-run-process.vue";
 
@@ -215,7 +215,7 @@ const showChangeParentDrawer = (command: string, node: any, data: { name: any; c
   console.log(node)
   console.log(data)
   if (command === 'copy'){
-    bus.emit(busEvent.drawerIsShow, {eventType: 'case-suite-parent', content: {parent: data.parent, id: data.id, project_id: project.value.id}})
+    bus.emit(busEvent.drawerIsShow, {eventType: 'copy-case', content: {parent: data.parent, id: data.id, project_id: project.value.id}})
   }else {
     // 修改用例集归属，暂不实现
     // bus.emit(busEvent.drawerIsShow, {eventType: 'case-suite-parent', content: JSON.parse(JSON.stringify(data))})
@@ -335,6 +335,10 @@ const drawerIsCommit = (message: any) => {
     treeIsDone(treeData.value)
   }else if (message.eventType === 'upload-case-suite'){
     getCaseSuiteList(project.value.id)
+  }else if (message.eventType === 'copy-suite') {
+    if (message.needRefresh === true) {
+      getCaseSuiteList(project.value.id)
+    }
   }
 }
 
