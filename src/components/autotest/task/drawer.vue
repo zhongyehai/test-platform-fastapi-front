@@ -90,6 +90,12 @@
               <el-radio v-model="formData.is_send" label="not_send">不发送</el-radio>
               <el-radio v-model="formData.is_send" label="always">始终发送</el-radio>
               <el-radio v-model="formData.is_send" label="on_fail">仅有不通过用例时发送</el-radio>
+              <el-tooltip class="item" effect="dark" placement="top-start">
+                <template #content>
+                  <div>此设置仅对定时任务自动触发有效，若是手动触发执行，则需要执行完毕后手动推送报告通知</div>
+                </template>
+                <span style="margin-left:5px;color: #409EFF"><Help></Help></span>
+              </el-tooltip>
             </el-form-item>
 
             <el-form-item v-show="formData.env_list.length > 1" prop="merge_notify" label="是否合并通知" size="small" class="is-required">
@@ -112,7 +118,7 @@
               <el-radio v-model="formData.receive_type" label="email" @change="changeWebHookList">邮件</el-radio>
               <el-tooltip class="item" effect="dark" placement="top-start">
                 <template #content>
-                  <div>企业微信和飞书的webhook未完全支持，请自行开发和调试</div>
+                  <div>飞书的webhook未完全支持，请自行开发和调试</div>
                 </template>
                 <span style="margin-left:5px;color: #409EFF"><Help></Help></span>
               </el-tooltip>

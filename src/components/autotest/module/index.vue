@@ -94,6 +94,7 @@
                         <SortThree v-show="data.parent" style="color: #409EFF;margin: 0; padding: 2px" @click.stop="showSortDrawer(data)"></SortThree>
                         <Plus style="color: #409EFF;margin: 0; padding: 2px" @click.stop="showEditDrawer('add', node, data)"></Plus>
                         <Write style="color: #409EFF;margin: 0; padding: 2px" @click.stop="showEditDrawer('edit', node, data)"></Write>
+                        <Transform style="color: #409EFF;margin: 0; padding: 2px" @click.stop="showModuleToSuiteDrawer(node, data)"></Transform>
                         <Delete style="color: red;margin: 0; padding: 2px" @click.stop="clickDeleteModule(node, data)"></Delete>
                       </div>
                     </div>
@@ -131,7 +132,7 @@
 
 <!--      <selectRunEnv :test-type="testType" :business-id="project.business_id"></selectRunEnv>-->
 <!--      <showRunProcess :test-type="testType"></showRunProcess>-->
-
+    <moduleToSuite :test-type="testType" :project-list="projectList"></moduleToSuite>
     </div>
   </div>
 </template>
@@ -139,7 +140,7 @@
 <script setup lang="ts">
 
 import {onMounted, ref, onBeforeUnmount, watch, computed, nextTick} from "vue";
-import {Clear, Copy, Delete, Minus, Plus, SortThree, Write} from "@icon-park/vue-next";
+import {Clear, Copy, Delete, Minus, Plus, SortThree, Write, Transform} from "@icon-park/vue-next";
 import editModuleDrawer from "./edit-drawer.vue";
 import addModuleDrawer from "./add-drawer.vue";
 import sortDrawer from "../sort-drawer.vue";
@@ -157,6 +158,7 @@ import {arrayToTree, ellipsis} from "@/utils/parse-data";
 import {ElMessage, ElMessageBox, ElTree} from "element-plus";
 import {GetApiFrom, GetApiToStep} from "@/api/autotest/api";
 import {GetConfigByCode} from "@/api/config/config-value";
+import ModuleToSuite from "@/components/autotest/module/module-to-suite.vue";
 
 const props = defineProps({
   testType: {
@@ -223,6 +225,10 @@ const showEditDrawer = (command: string, node: any, data: { name: any; controlle
   }else {
     bus.emit(busEvent.drawerIsShow, {eventType: 'edit-module', content: JSON.parse(JSON.stringify(data))})
   }
+}
+
+const showModuleToSuiteDrawer = (node: any, data: { name: any; controller: any; }) => {
+  bus.emit(busEvent.drawerIsShow, {eventType: 'module-to-suite', content: JSON.parse(JSON.stringify(data))})
 }
 
 const treeIsDone = (moduleTree: never[]) => {

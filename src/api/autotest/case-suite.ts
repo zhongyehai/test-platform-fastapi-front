@@ -51,3 +51,8 @@ export function ChangeCaseSuiteParent(testType: string, data: object) {
 export function CopyCaseSuite(testType: string, data: object) {
     return request({ url: getBaseDir(testType) + '/copy', method: 'post', data: data })
 }
+
+
+export function ApiModuleToCaseSuite(testType: string, data: object) {
+    return request({ url: getBaseDir(testType) + '/from-module', method: 'post', data: data })
+}
