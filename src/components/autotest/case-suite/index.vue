@@ -211,9 +211,6 @@ const showEditDrawer = (command: string, node: any, data: { name: any; controlle
 }
 
 const showChangeParentDrawer = (command: string, node: any, data: { name: any; controller: any; }) => {
-  console.log(command)
-  console.log(node)
-  console.log(data)
   if (command === 'copy'){
     bus.emit(busEvent.drawerIsShow, {eventType: 'copy-case', content: {parent: data.parent, id: data.id, project_id: project.value.id}})
   }else {
@@ -228,7 +225,7 @@ const treeIsDone = (moduleTree: never[]) => {
 
 const clickDeleteModule = (node: any, data: { name: any; }) => {
   ElMessageBox.confirm(
-      `确定删除【${data.name}】`,
+      `确定删除【${tempLabel.value}】？此操作将删除当前用例集和当前用例集下的用例，以及所有下属用例集和用例`,
       '提示',
       {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
       .then(() => {
