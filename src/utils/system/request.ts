@@ -44,6 +44,8 @@ service.interceptors.request.use(
         config.headers['access-token'] = localStorage.getItem('accessToken')
         // @ts-ignore
         config.headers['request-id'] = getRequestId()
+        // @ts-ignore
+        config.headers['device-id'] = localStorage.getItem('deviceId')
         return config
     },
     (error: AxiosError) => {

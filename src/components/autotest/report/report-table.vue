@@ -224,18 +224,30 @@
         title="选择重跑维度"
         width="500"
     >
-      <div>
-        <span style="color: red">1、重跑失败的：重跑当前选择的报告下结果为不通过的用例</span>
+
+      <div style="margin-bottom: 20px;">
+        <div style="margin-bottom: 5px;">
+          <span style="color: red">1、重跑所有：重跑当前选择的报告下的所有用例</span>
+        </div>
+        <div style="margin-bottom: 5px;">
+          <span style="color: red">2、重跑失败的：重跑当前选择的报告下结果为不通过的用例</span>
+        </div>
+        <div style="margin-bottom: 5px;">
+          <span style="color: red">3、不管选择的是什么维度的重跑，都会生成一份新的测试报告</span>
+        </div>
       </div>
-      <div>
-        <span style="color: red">2、重跑所有：重跑当前选择的报告下的所有用例</span>
+
+      <div style="margin: 10px">
+        <el-radio v-model="reRunOption" label="all">重跑所有</el-radio>
+        <br>
+        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-not-cover">重跑失败的, 并且<span style="color:red;">【不覆盖】</span>原来的测试报告</el-radio>
+        <br>
+        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-and-cover">重跑失败的, 并把测试结果<span style="color:red;">【覆盖】</span>到原来的测试报告</el-radio>
       </div>
+
       <template #footer>
         <div class="dialog-footer">
-          <div style="float: left">
-            <el-button v-show="report.is_passed === 0" type="primary" size="small" @click="clickReRun('failed')">重跑失败的</el-button>
-            <el-button type="primary" size="small" @click="clickReRun('all')">重跑所有</el-button>
-          </div>
+          <el-button type="primary" size="small" @click="clickReRun()">确定重跑</el-button>
           <el-button size="small" @click="reRunDialogIsShow = false">取消</el-button>
         </div>
       </template>
@@ -329,7 +341,8 @@ const isAdmin = localStorage.getItem('permissions').indexOf('admin') !== -1
 const triggerFrom = 'report-index'
 const reRunDialogIsShow = ref(false)
 const reRunIdList = ref([])
-const reRunType = ref('failed')
+const reRunOption = ref('failed-and-cover')
+const update_to = ref()
 
 const rowDblclick = async (row: any, column: any, event: any) => {
   try {
@@ -388,6 +401,8 @@ const sendReRun = (tempRunArgs: any) => {
 
 const showReRunDialog = (row: {}) => {
   report.value = row
+  update_to.value = undefined
+  reRunOption.value = report.value.is_passed ? 'all' : 'failed-and-cover'
   reRunDialogIsShow.value = true
 }
 
@@ -399,12 +414,17 @@ const notifyReport = (row: {id: number}) => {
   })
 }
 
-const clickReRun = (type: string) => {
-  reRunType.value = type
-  if(type === "all") {
+const clickReRun = () => {
+  if(reRunOption.value === "all") {
     reRunIdList.value = report.value.trigger_id
   }else {
+    if(reRunOption.value === "failed-and-cover") {
+      update_to.value = report.value.id
+    }
     GetReportCaseFailedList(props.testType, {id: report.value.id}).then((response) => {
+      if (response.data.length === 0) {
+        ElMessage.warning('当前报告没有失败的用例')
+      }
       reRunIdList.value = response.data
     })
   }
@@ -428,7 +448,7 @@ const clickReRun = (type: string) => {
 
 const getRunUrl = () => {
   const run_type = report.value.run_type
-  if (reRunType.value === 'failed'){
+  if (reRunOption.value !== 'all'){
     return RunCase
   }
   return run_type === 'task' ? RunTask
@@ -448,6 +468,7 @@ const reRun = (runConf) => {
     phone_id: runConf.runPhone,
     no_reset: runConf.noReset,
     temp_variables: runConf.temp_variables,
+    update_to: update_to.value,
     'trigger_type': 'page'
   }).then(response => {
     if (response) {
@@ -562,12 +583,13 @@ const getProjectAndRunEnvList = (projectId: number) => {
 </script>
 
 <style scoped lang="scss">
-.first-col {
-  width: 20% !important;
-}
 
-.second-col {
-  width: 79% !important;
-}
+//.first-col {
+//  width: 20% !important;
+//}
+//
+//.second-col {
+//  width: 79% !important;
+//}
 
 </style>

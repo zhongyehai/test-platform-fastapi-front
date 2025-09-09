@@ -8,12 +8,20 @@
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
 
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
+
+
 export default defineComponent({
   name: 'App',
   setup() {
     const store = useStore()
     const size = computed(() => store.state.app.elementSize)
+    const fpPromise = FingerprintJS.load();
 
+    // 获取设备id
+    fpPromise.then(fp => fp.get()).then(result => {
+      localStorage.setItem("deviceId", result.visitorId)
+    });
     return {
       size,
     }
