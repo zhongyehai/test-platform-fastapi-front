@@ -240,9 +240,9 @@
       <div style="margin: 10px">
         <el-radio v-model="reRunOption" label="all">重跑所有</el-radio>
         <br>
-        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-not-cover">重跑失败的, 并且<span style="color:red;">【不覆盖】</span>原来的测试报告</el-radio>
+        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-not-cover">重跑失败的, 并且<span style="color:red;">【不保存】</span>到当前测试报告下</el-radio>
         <br>
-        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-and-cover">重跑失败的, 并把测试结果<span style="color:red;">【覆盖】</span>到原来的测试报告</el-radio>
+        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-and-cover">重跑失败的, 并把测试结果<span style="color:red;">【保存】</span>到当前测试报告下</el-radio>
       </div>
 
       <template #footer>
@@ -342,7 +342,7 @@ const triggerFrom = 'report-index'
 const reRunDialogIsShow = ref(false)
 const reRunIdList = ref([])
 const reRunOption = ref('failed-and-cover')
-const update_to = ref()
+const insert_to = ref()
 
 const rowDblclick = async (row: any, column: any, event: any) => {
   try {
@@ -401,7 +401,7 @@ const sendReRun = (tempRunArgs: any) => {
 
 const showReRunDialog = (row: {}) => {
   report.value = row
-  update_to.value = undefined
+  insert_to.value = undefined
   reRunOption.value = report.value.is_passed ? 'all' : 'failed-and-cover'
   reRunDialogIsShow.value = true
 }
@@ -419,7 +419,7 @@ const clickReRun = () => {
     reRunIdList.value = report.value.trigger_id
   }else {
     if(reRunOption.value === "failed-and-cover") {
-      update_to.value = report.value.id
+      insert_to.value = report.value.id
     }
     GetReportCaseFailedList(props.testType, {id: report.value.id}).then((response) => {
       if (response.data.length === 0) {
@@ -468,7 +468,7 @@ const reRun = (runConf) => {
     phone_id: runConf.runPhone,
     no_reset: runConf.noReset,
     temp_variables: runConf.temp_variables,
-    update_to: update_to.value,
+    insert_to: insert_to.value,
     'trigger_type': 'page'
   }).then(response => {
     if (response) {

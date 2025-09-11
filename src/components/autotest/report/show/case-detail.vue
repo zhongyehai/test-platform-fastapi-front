@@ -15,7 +15,7 @@
         <el-descriptions class="margin-top" :column="2" border>
           <el-descriptions-item>
             <template #label> 用例名 </template>
-            {{ reportCaseData.realName }}
+            {{ reportCaseData.name }}
           </el-descriptions-item>
 
           <el-descriptions-item>
