@@ -111,7 +111,7 @@
               </el-tooltip>
             </el-form-item>
 
-            <el-form-item v-show="formData.is_send !== 'not_send'" prop="receive_type" size="small" class="is-required" label="接收方式">
+            <el-form-item v-show="formData.is_send !== 'not_send'" prop="receive_type" size="small" class="is-required" label="通知渠道">
               <el-radio v-model="formData.receive_type" label="ding_ding" @change="changeWebHookList">钉钉</el-radio>
               <el-radio v-model="formData.receive_type" label="we_chat" @change="changeWebHookList">企业微信</el-radio>
               <el-radio v-model="formData.receive_type" label="fei_shu" disabled @change="changeWebHookList">飞书</el-radio>

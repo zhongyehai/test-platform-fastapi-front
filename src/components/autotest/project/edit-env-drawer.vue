@@ -1,7 +1,6 @@
 <template>
   <div>
-    <el-drawer v-model="drawerIsShow" :title="formData.id ? '修改环境' : '新增环境'" size="80%">
-
+    <el-drawer v-model="drawerIsShow" :title="formData.id ? `修改环境 - ${projectName}` : `新增环境 - ${projectName}`" size="80%">
       <div
           v-loading.fullscreen.lock="drawerIsLoading"
           element-loading-text="正在处理中"
@@ -159,16 +158,20 @@ const props = defineProps({
 })
 
 onMounted(() => {
+  handleResize()
+  window.addEventListener('resize', handleResize);
   bus.on(busEvent.drawerIsShow, onShowDrawerEvent);
 })
 
 onBeforeUnmount(() => {
   bus.off(busEvent.drawerIsShow, onShowDrawerEvent);
+  window.removeEventListener('resize', handleResize);
 })
 
 const onShowDrawerEvent = (message: any) => {
   if (message.eventType === 'project-env-editor') {
     businessId.value = message.content.business_id
+    projectName.value = message.content.name
     resetForm(message.content.id)
     getRunEnvList()
     drawerIsShow.value = true
@@ -214,6 +217,7 @@ const handleResize = () => {
 }
 
 const businessId = ref()
+const projectName = ref()
 const drawerIsShow = ref(false)
 const drawerIsLoading = ref(true)
 const variablesViewRef = ref(null)
@@ -328,14 +332,6 @@ const changeData = (isClose: boolean) => {
   })
 }
 
-onMounted(() => {
-  handleResize()
-  window.addEventListener('resize', handleResize);
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize);
-})
 
 </script>
 

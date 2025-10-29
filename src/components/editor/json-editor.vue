@@ -117,9 +117,9 @@ const tableHeight = ref('10px')
 const setTableHeight = () => {
   if (props.height === undefined) {
     if (window.innerHeight < 800){  // 小屏
-      tableHeight.value = `${window.innerHeight * 0.738}px`
+      tableHeight.value = `${window.innerHeight * 0.5}px`
     }else {  // 大屏
-      tableHeight.value =  `${window.innerHeight * 0.86}px`
+      tableHeight.value =  `${window.innerHeight * 0.64}px`
     }
   }else {
     tableHeight.value = props.height

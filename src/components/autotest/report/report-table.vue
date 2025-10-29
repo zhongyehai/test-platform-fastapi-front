@@ -168,17 +168,26 @@
           label="操作"
           width="150">
         <template #default="scope">
-          <el-popconfirm title="确定把此报告的运行结果通知到对应任务的报告接收人吗？" @confirm="notifyReport(scope.row)">
-            <template #reference>
-              <el-button
-                  v-show="scope.row.process === 3 && scope.row.status === 2 && scope.row.run_type === 'task' && scope.row.notified === false"
-                  type="text"
-                  size="small"
-                  style="margin: 0; padding: 2px"
-              >通知
-              </el-button>
-            </template>
-          </el-popconfirm>
+<!--          <el-popconfirm title="确定把此报告的运行结果通知到对应任务的报告接收人吗？" @confirm="notifyReport(scope.row)">-->
+<!--            <template #reference>-->
+<!--              <el-button-->
+<!--                  v-show="scope.row.process === 3 && scope.row.status === 2 && scope.row.run_type === 'task' && scope.row.notified === false"-->
+<!--                  type="text"-->
+<!--                  size="small"-->
+<!--                  style="margin: 0; padding: 2px"-->
+<!--              >通知-->
+<!--              </el-button>-->
+<!--            </template>-->
+<!--          </el-popconfirm>-->
+
+          <el-button
+              v-show="scope.row.process === 3 && scope.row.status === 2 && scope.row.run_type === 'task' && scope.row.notified === false"
+              type="text"
+              size="small"
+              style="margin: 0; padding: 2px"
+              @click.native="showNotifyDialog(scope.row)"
+          >通知
+          </el-button>
 
           <el-button
               v-show="scope.row.run_type !== 'api' || isAdmin"
@@ -249,6 +258,38 @@
         <div class="dialog-footer">
           <el-button type="primary" size="small" @click="clickReRun()">确定重跑</el-button>
           <el-button size="small" @click="reRunDialogIsShow = false">取消</el-button>
+        </div>
+      </template>
+    </el-dialog>
+
+    <el-dialog
+        v-model="notifyDialogIsShow"
+        title="选择通知渠道"
+        width="500"
+    >
+      <div style="margin-bottom: 20px;font-size: 20px;text-align: center">{{ report.name }}</div>
+
+      <div style="margin-bottom: 20px;">
+        <div style="margin-bottom: 5px;">
+          <span style="color: red">1、若选择的通知渠道不是“按任务设置”，则默认为“始终发送”</span>
+        </div>
+        <div style="margin-bottom: 5px;">
+          <span style="color: red">2、必须在对应任务的通知渠道设置了通知对象才能成功发送</span>
+        </div>
+      </div>
+
+      <div style="margin: 10px">
+        <el-radio v-model="notifyTo" label="default">按任务设置</el-radio>
+        <el-radio v-model="notifyTo" label="ding_ding">钉钉</el-radio>
+        <el-radio v-model="notifyTo" label="we_chat">企业微信</el-radio>
+        <el-radio v-model="notifyTo" label="fei_shu" disabled>飞书</el-radio>
+        <el-radio v-model="notifyTo" label="email">邮件</el-radio>
+      </div>
+
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="primary" size="small" @click="notifyReport()">确定通知</el-button>
+          <el-button size="small" @click="notifyDialogIsShow = false">取消</el-button>
         </div>
       </template>
     </el-dialog>
@@ -343,6 +384,9 @@ const reRunDialogIsShow = ref(false)
 const reRunIdList = ref([])
 const reRunOption = ref('failed-and-cover')
 const insert_to = ref()
+const notifyTo = ref('default')
+const notifyDialogIsShow = ref(false)
+
 
 const rowDblclick = async (row: any, column: any, event: any) => {
   try {
@@ -406,9 +450,15 @@ const showReRunDialog = (row: {}) => {
   reRunDialogIsShow.value = true
 }
 
-const notifyReport = (row: {id: number}) => {
+const showNotifyDialog = (row: {}) => {
+  report.value = row
+  notifyTo.value = 'default'
+  notifyDialogIsShow.value = true
+}
+
+const notifyReport = () => {
   tableIsLoading.value = true
-  NotifyReport(props.testType, {id: row.id}).then(response => {
+  NotifyReport(props.testType, {id: report.value.id, notify_to: notifyTo.value}).then(response => {
     tableIsLoading.value = false
     getTableDataList()
   })
