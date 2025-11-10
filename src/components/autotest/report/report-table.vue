@@ -288,7 +288,7 @@
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" size="small" @click="notifyReport()">确定通知</el-button>
+          <el-button type="primary" :loading="notifyIsLoading" size="small" @click="notifyReport()">确定通知</el-button>
           <el-button size="small" @click="notifyDialogIsShow = false">取消</el-button>
         </div>
       </template>
@@ -385,6 +385,7 @@ const reRunIdList = ref([])
 const reRunOption = ref('failed-and-cover')
 const insert_to = ref()
 const notifyTo = ref('default')
+const notifyIsLoading = ref(false)
 const notifyDialogIsShow = ref(false)
 
 
@@ -454,12 +455,14 @@ const showNotifyDialog = (row: {}) => {
   report.value = row
   notifyTo.value = 'default'
   notifyDialogIsShow.value = true
+  notifyIsLoading.value = false
 }
 
 const notifyReport = () => {
-  tableIsLoading.value = true
+  notifyIsLoading.value = true
   NotifyReport(props.testType, {id: report.value.id, notify_to: notifyTo.value}).then(response => {
-    tableIsLoading.value = false
+    notifyIsLoading.value = false
+    notifyDialogIsShow.value = false
     getTableDataList()
   })
 }

@@ -368,7 +368,7 @@
               default-first-option
               size="small"
           >
-            <el-option v-for="(item) in elementList" :key="item.id" :label="item.name" :value="item.id" />
+            <el-option v-for="(item) in elementList" :key="item.id" :label="item.name" :value="item.id.toString()" />
           </el-select>
         </template>
       </el-table-column>
@@ -482,6 +482,7 @@ const initTempData = (data: string | any[] | undefined) => {
     tempData.value = []
     props.currentData.forEach((data, index) => {
       data['id'] = `${Date.now()}_${index}`
+      data['data_source'] = 'page'
       tempData.value.push(JSON.parse(JSON.stringify(data)))
     })
   } else {
@@ -500,6 +501,7 @@ const getExtractMappingList= () => {
 const getNewData = () => {
   return {
     id: `${Date.now()}`,
+    data_source: 'page',
     status: 0,
     key: null,
     extract_type: null,

@@ -211,7 +211,7 @@
                 />
               </div>
               <div v-show="scope.row.validate_type === 'page'">
-                <el-option v-for="(item) in elementList" :key="item.id" :label="item.name" :value="item.id" />
+                <el-option v-for="(item) in elementList" :key="item.id" :label="item.name" :value="item.id.toString()" />
               </div>
             </el-select>
           </el-row>
