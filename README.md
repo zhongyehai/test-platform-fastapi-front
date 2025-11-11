@@ -17,7 +17,7 @@ npm run dev
 npm run build
 ```
 
-## 线上预览：http://139.196.100.202/#/login  账号：admin、密码：123456，请不要修改密码
+## 线上预览：http://60.204.247.140/login  账号：admin、密码：123456，请不要修改密码
 
 ## 后端传送门：https://github.com/zhongyehai/test-platform-fastapi-api
 

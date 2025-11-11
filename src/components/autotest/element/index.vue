@@ -275,7 +275,7 @@ onBeforeUnmount(() => {
 })
 
 const drawerIsCommit = (message: any) => {
-  if (message.eventType === 'element-editor') {
+  if (message.eventType === 'element-editor' || message.eventType === 'element-upload-success') {
     getTableDataList()
   }
 }

@@ -59,9 +59,10 @@ const onShowDrawerEvent = (message: any) => {
 const uploadFile = (response: any, file: { raw: string | Blob; }) =>{
   const form = new FormData()
   form.append('file', file.raw)
-  form.append('id', pageId.value)
+  form.append('page_id', pageId.value)
   UploadElement(props.testType, form).then((response) => {
         if (response) {
+          bus.emit(busEvent.drawerIsCommit, {eventType: 'element-upload-success'});
           drawerIsShow.value = false
         }
       }
@@ -84,9 +85,6 @@ const downloadTemplate = () => {
 const drawerIsShow = ref(false)
 const pageId = ref()
 const submitButtonIsLoading = ref(false)
-const sendEvent = () => {
-  bus.emit(busEvent.drawerIsCommit, {eventType: 'page-editor'});
-}
 
 </script>
 
