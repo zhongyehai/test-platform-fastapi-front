@@ -35,7 +35,7 @@
               type="textarea"
               :rows="1"
               :placeholder="
-                  formData.by === 'bounds' ? '如元素坐标范围为[918,1079][1080,1205]，则填写: ([918,1079], [1080,1205])' :
+                  formData.by === 'bounds' ? '如元素坐标范围为[918,1079][1080,1205]，则填写: [[918,1079], [1080,1205]]' :
                   formData.by === 'coordinate' ? '请填写具体坐标: (x, y)' : '元素表达式'"
               :style="{'width': ['bounds', 'coordinate'].indexOf(formData.by) !== -1 ? '98%' : '100%'}"
           />
@@ -44,7 +44,7 @@
             <template #content>
               <div v-show="formData.by === 'bounds'">
                 <div>请填写定位工具上bounds字段的值：[[x1, y1], [x2, y2]]</div>
-                <div>如坐标为[918,1079][1080,1205]，则填写: ([918,1079], [1080,1205])</div>
+                <div>如坐标为[918,1079][1080,1205]，则填写: [[918,1079], [1080,1205]]</div>
               </div>
               <div v-show="formData.by === 'coordinate'">
                 <div>请填写具体坐标值：(x, y)</div>
