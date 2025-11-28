@@ -39,6 +39,7 @@
                       'textDecoration': data.result === 'skip' ? 'line-through' : ''
                     }"
                     >
+                      {{ data.result }}
                       <span style="font-size: 12px">【{{ getTage(data) }}】<span :style="{color: getSpanColor(data)}">{{ getDuration(data) }}</span></span>
                       <span>{{ node.label }}</span>
                     </span>
@@ -148,8 +149,9 @@ const mouseleave = (data: { name: any; showDropdownMenu: boolean; }) => {
 const getColor = (data) => {
   return data.result === 'error' ? 'rgb(232, 124, 37)'
       : data.result === 'fail' ? 'rgb(250, 110, 134)'
-          : data.result === 'skip' ? '#909399'
-              : 'rgb(25, 212, 174)'
+          : data.result === 'success' ? 'rgb(25, 212, 174)'
+          : data.result === 'running' ? '#3A8EE6'
+          : '#909399'
 }
 
 const getTage = (data) => {

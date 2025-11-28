@@ -113,7 +113,10 @@
                   <el-table-column show-overflow-tooltip prop="receive_type" label="发送报告" align="center" min-width="19%">
                     <template #default="scope">
                       <el-tag v-if="scope.row.is_send === 'not_send'" type="warning">不发送</el-tag>
-                      <el-tag v-else type="success">{{scope.row.is_send === 'always' ? '始终' : '不通过'}} =>
+                      <el-tag v-else type="success">{{
+                          scope.row.is_send === 'always' ? '始终' :
+                              scope.row.is_send === 'on_success' ? '全通过' : '不通过'
+                        }} =>
                         {{
                           scope.row.receive_type === 'ding_ding' ? "钉钉" :
                               scope.row.receive_type === 'we_chat' ? "企业微信" : "邮件"

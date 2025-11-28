@@ -153,8 +153,24 @@
         </template>
       </el-table-column>
 
-      <el-table-column show-overflow-tooltip prop="create_user" label="创建人" align="center"
-                       min-width="7%">
+      <el-table-column show-overflow-tooltip prop="process" label="是否通知" align="center" min-width="7%">
+        <template #header>
+          <span>是否通知</span>
+          <el-tooltip class="item" effect="dark" placement="top-start">
+            <template #content>
+              <div>只有执行任务产生的报告才能触发通知</div>
+            </template>
+            <span style="margin-left:5px;color: #409EFF"><Help></Help></span>
+          </el-tooltip>
+        </template>
+        <template #default="scope">
+          <el-tag size="small" :type="scope.row.notified === true ? 'success' : 'info'" >
+            {{ scope.row.notified === true ? '已通知' : '未通知' }}
+          </el-tag>
+        </template>
+      </el-table-column>
+
+      <el-table-column show-overflow-tooltip prop="create_user" label="创建人" align="center" min-width="7%">
         <template #default="scope">
           <span> {{ userDict[scope.row.create_user] }} </span>
         </template>
@@ -325,6 +341,7 @@ import {RunTask} from "@/api/autotest/task";
 import {RunCaseSuite} from "@/api/autotest/case-suite";
 import {RunApi} from "@/api/autotest/api";
 import {paramsISOTime} from "@/utils/parse-data";
+import {Help} from "@icon-park/vue-next";
 
 const props = defineProps({
   testType: {

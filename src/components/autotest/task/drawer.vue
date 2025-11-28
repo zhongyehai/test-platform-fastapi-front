@@ -89,6 +89,7 @@
             <el-form-item prop="is_send" label="发送报告" size="small" class="is-required">
               <el-radio v-model="formData.is_send" label="not_send">不发送</el-radio>
               <el-radio v-model="formData.is_send" label="always">始终发送</el-radio>
+              <el-radio v-model="formData.is_send" label="on_success">仅全部用例通过时发送</el-radio>
               <el-radio v-model="formData.is_send" label="on_fail">仅有不通过用例时发送</el-radio>
               <el-tooltip class="item" effect="dark" placement="top-start">
                 <template #content>
