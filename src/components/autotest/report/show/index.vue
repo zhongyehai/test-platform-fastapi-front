@@ -184,7 +184,7 @@
           <span style="color: red">1、重跑所有：重跑当前选择的报告下的所有用例</span>
         </div>
         <div style="margin-bottom: 5px;">
-          <span style="color: red">2、重跑失败的：重跑当前选择的报告下结果为不通过的用例</span>
+          <span style="color: red">2、重跑不通过的：重跑当前选择的报告下结果为不通过的用例</span>
         </div>
         <div style="margin-bottom: 5px;">
           <span style="color: red">3、不管选择的是什么维度的重跑，都会生成一份新的测试报告</span>
@@ -194,9 +194,11 @@
       <div style="margin: 10px">
         <el-radio v-model="reRunOption" label="all">重跑所有</el-radio>
         <br>
-        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-not-cover">重跑失败的, 并且<span style="color:red;">【不保存】</span>到当前测试报告下</el-radio>
+        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="passed">重跑通过的, 并且<span style="color:red;">【不保存】</span>到当前测试报告下</el-radio>
         <br>
-        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-and-cover">重跑失败的, 并把测试结果<span style="color:red;">【保存】</span>到当前测试报告下</el-radio>
+        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-not-cover">重跑不通过的, 并且<span style="color:red;">【不保存】</span>到当前测试报告下</el-radio>
+        <br>
+        <el-radio :disabled="report.is_passed" v-model="reRunOption" label="failed-and-cover">重跑不通过的, 并把测试结果<span style="color:red;">【保存】</span>到当前测试报告下</el-radio>
       </div>
 
       <template #footer>
@@ -219,7 +221,7 @@ import {
   DeleteReport,
   ReportAsCase,
   ChangeReportStepStatus,
-  GetReportCaseFailedList
+  GetReportRerunCaseList
 } from "@/api/autotest/report";import {GetProject} from "@/api/autotest/project";
 import {GetRunEnvList} from "@/api/config/run-env";
 import {bus, busEvent} from "@/utils/bus-events";
@@ -416,8 +418,13 @@ const clickReRun = () => {
   }else {
     if(reRunOption.value === "failed-and-cover") {
       insert_to.value = report.value.id
+    }else {
+      insert_to.value = undefined
     }
-    GetReportCaseFailedList(props.testType, {id: report.value.id}).then((response) => {
+    GetReportRerunCaseList(props.testType, {
+      id: report.value.id,
+      result: reRunOption.value.includes("failed") ? 'failed' : 'passed'
+    }).then((response) => {
       if (response.data.length === 0) {
         ElMessage.warning('当前报告没有失败的用例')
       }

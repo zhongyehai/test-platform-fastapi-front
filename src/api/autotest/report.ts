@@ -40,8 +40,8 @@ export function GetReportCaseList(testType: string, params: object) {
     return request({ url: getBaseDir(testType) + '/case-list', method: 'get', data: null, params: params })
 }
 
-export function GetReportCaseFailedList(testType: string, params: object) {
-    return request({ url: getBaseDir(testType) + '/case-failed', method: 'get', data: null, params: params })
+export function GetReportRerunCaseList(testType: string, params: object) {
+    return request({ url: getBaseDir(testType) + '/rerun-case', method: 'get', data: null, params: params })
 }
 
 export function GetReportCaseDetail(testType: string, params: object) {

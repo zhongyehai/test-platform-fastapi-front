@@ -39,7 +39,6 @@
                       'textDecoration': data.result === 'skip' ? 'line-through' : ''
                     }"
                     >
-                      {{ data.result }}
                       <span style="font-size: 12px">【{{ getTage(data) }}】<span :style="{color: getSpanColor(data)}">{{ getDuration(data) }}</span></span>
                       <span>{{ node.label }}</span>
                     </span>
