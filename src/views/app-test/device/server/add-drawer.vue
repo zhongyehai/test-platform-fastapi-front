@@ -85,6 +85,25 @@
           </template>
         </el-table-column>
 
+        <el-table-column header-align="center" min-width="15%">
+          <template #header>
+            <span><span style="color: red">*</span>appium版本</span>
+          </template>
+          <template #default="scope">
+            <el-select
+                v-model="scope.row.appium_version"
+                filterable
+                default-first-option
+                clearable
+                size="small"
+                style="width:100%"
+                placeholder="请选择appium版本"
+            >
+              <el-option v-for="version in appiumVersions" :key="version" :label="version" :value="version"/>
+            </el-select>
+          </template>
+        </el-table-column>
+
         <el-table-column fixed="right"  align="center" label="操作" width="90">
           <template #default="scope">
             <el-tooltip class="item" effect="dark" placement="top-end" content="添加一行">
@@ -181,12 +200,14 @@ const submitButtonIsLoading = ref(false)
 const ruleFormRef = ref(null)
 const oldIndex = ref(); // 当前拖拽项的索引
 const dragRow = ref();   // 当前拖拽的行数据
+const appiumVersions = ['1.x', '2.x', '3.x']
 const formData = ref({
   data_list: [{
     id: `${Date.now()}`,
     name: null,
     os: null,
     ip: null,
+    appium_version: appiumVersions[0],
     port: '4723'
   }]
 })
@@ -197,6 +218,7 @@ const resetForm = () => {
       name: null,
       os: null,
       ip: null,
+      appium_version: appiumVersions[0],
       port: '4723'
     }]
   }
@@ -214,6 +236,7 @@ const getNewData = () => {
     name: null,
     os: null,
     ip: null,
+    appium_version: appiumVersions[0],
     port: '4723'
   }
 }
@@ -247,7 +270,7 @@ const validateDataList = () => {
     throw new Error('请填写服务器信息')
   }
   formData.value.data_list.forEach((item, index) => {
-    if (!item.name|| !item.os || !item.ip || !item.port){
+    if (!item.name|| !item.os || !item.ip || !item.port || !item.appium_version){
       ElMessage.warning(`第 ${index + 1} 行, 请完善数据`)
       throw new Error(`第 ${index + 1} 行, 请完善数据`);
     }

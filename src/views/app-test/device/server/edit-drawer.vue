@@ -45,6 +45,20 @@
           <el-input v-model="formData.port" size="small" placeholder="服务器端口" />
         </el-form-item>
 
+        <el-form-item label="appium版本" prop="appium_version" size="small" class="is-required">
+          <el-select
+              v-model="formData.appium_version"
+              filterable
+              default-first-option
+              clearable
+              size="small"
+              style="width:100%"
+              placeholder="请选择appium版本"
+          >
+            <el-option v-for="version in appiumVersions" :key="version" :label="version" :value="version"/>
+          </el-select>
+        </el-form-item>
+
       </el-form>
 
       <template #footer>
@@ -87,6 +101,7 @@ const onShowDrawerEvent = (message: any) => {
   }
 }
 
+const appiumVersions = ['1.x', '2.x', '3.x']
 const drawerIsShow = ref(false)
 const submitButtonIsLoading = ref(false)
 const ruleFormRef = ref(null)
@@ -95,6 +110,7 @@ const formData = ref({
   name: undefined,
   os: undefined,
   ip: undefined,
+  appium_version: appiumVersions[0],
   port: '4723'
 })
 const formRules = {
@@ -109,6 +125,9 @@ const formRules = {
   ],
   port: [
     {required: true, message: '请输入服务器端口', trigger: 'blur'}
+  ],
+  appium_version: [
+    {required: true, message: '请选择appium版本', trigger: 'blur'}
   ]
 }
 const resetForm = () => {
@@ -117,6 +136,7 @@ const resetForm = () => {
     name: undefined,
     os: undefined,
     ip: undefined,
+    appium_version: appiumVersions[0],
     port: '4723'
   }
   ruleFormRef.value && ruleFormRef.value.resetFields();

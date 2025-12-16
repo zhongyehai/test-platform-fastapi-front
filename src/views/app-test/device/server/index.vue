@@ -69,6 +69,12 @@
           </template>
         </el-table-column>
 
+        <el-table-column show-overflow-tooltip prop="appium_version" align="center" label="appium版本" min-width="10%">
+          <template #default="scope">
+            <span> {{ scope.row.appium_version }} </span>
+          </template>
+        </el-table-column>
+
         <el-table-column prop="status" align="center" label="最近一次访问状态" min-width="15%">
           <template #default="scope">
             <el-tag size="small" :type="appiumServerRequestStatusMappingTagType[scope.row.status]">
