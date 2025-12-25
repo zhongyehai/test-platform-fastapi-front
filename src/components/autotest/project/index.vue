@@ -108,13 +108,31 @@
             v-if="testType === 'api'"
             show-overflow-tooltip
             align="center"
-            label="swagger"
-            prop="swagger"
+            label="接口文档类型"
+            prop="source_type"
+            min-width="10%"
+        >
+          <template #default="scope">
+            <div v-if="scope.row.source_type">
+              <span>{{ scope.row.source_type }}</span>
+            </div>
+            <div v-else>
+              <el-tag type="warning">未设置</el-tag>
+            </div>
+          </template>
+        </el-table-column>
+
+        <el-table-column
+            v-if="testType === 'api'"
+            show-overflow-tooltip
+            align="center"
+            label="接口文档地址"
+            prop="source_addr"
             min-width="35%"
         >
           <template #default="scope">
-            <div v-if="scope.row.swagger">
-              <span>{{ scope.row.swagger }}</span>
+            <div v-if="scope.row.source_addr">
+              <span>{{ scope.row.source_addr }}</span>
             </div>
             <div v-else>
               <el-tag type="warning">未设置</el-tag>
@@ -182,7 +200,7 @@
 
         <el-table-column fixed="right" show-overflow-tooltip prop="desc" align="center" label="操作" width="140">
           <template #default="scope">
-            <el-button v-show="scope.row.swagger" style="margin: 0; padding: 2px" type="text" size="small" @click.native="showPullSwaggerDrawer(scope.row)">拉取</el-button>
+            <el-button v-show="scope.row.source_addr" style="margin: 0; padding: 2px" type="text" size="small" @click.native="showPullSwaggerDrawer(scope.row)">拉取</el-button>
             <el-button style="margin: 0; padding: 2px" type="text" size="small" @click.native="showEditDrawer(scope.row, 'project')">修改</el-button>
             <el-button style="margin: 0; padding: 2px" type="text" size="small" @click.native="showEditDrawer(scope.row, 'env')">环境</el-button>
             <el-popconfirm width="250px" :title="`确定删除【${ scope.row.name }】?`" @confirm="deleteData(scope.row.id)">

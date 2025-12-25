@@ -99,7 +99,13 @@
 
       <el-table-column show-overflow-tooltip prop="id" align="center" label="报告id" min-width="5%"/>
 
-      <el-table-column show-overflow-tooltip prop="name" align="center" label="报告名称" min-width="22%"/>
+      <el-table-column show-overflow-tooltip prop="name" align="center" label="报告名称" min-width="22%">
+        <template #default="scope">
+          <el-tag v-show="scope.row.retry_count>0" size="small" style="margin-right: 5px" type="warning">
+            重跑{{ scope.row.retry_count }}次
+          </el-tag>{{ scope.row.name }}
+        </template>
+      </el-table-column>
 
       <el-table-column show-overflow-tooltip prop="create_time" align="center" label="生成时间"
                        min-width="13%">
@@ -133,15 +139,6 @@
         </template>
       </el-table-column>
 
-      <el-table-column show-overflow-tooltip prop="is_passed" label="是否通过" align="center"
-                       min-width="8%">
-        <template #default="scope">
-          <el-tag size="small" :type="reportStatusMappingTagType[scope.row.is_passed]">
-            {{ reportStatusMappingContent[scope.row.is_passed] }}
-          </el-tag>
-        </template>
-      </el-table-column>
-
       <el-table-column show-overflow-tooltip prop="process" label="是否完成" align="center" min-width="7%">
         <template #default="scope">
           <el-tag
@@ -149,6 +146,15 @@
               :type="scope.row.process === 3 && scope.row.status === 2 ? 'success' : 'warning'"
           >
             {{ scope.row.process === 3 && scope.row.status === 2 ? '已完成' : '执行中' }}
+          </el-tag>
+        </template>
+      </el-table-column>
+
+      <el-table-column show-overflow-tooltip prop="is_passed" label="是否通过" align="center"
+                       min-width="8%">
+        <template #default="scope">
+          <el-tag size="small" :type="reportStatusMappingTagType[scope.row.is_passed]">
+            {{ reportStatusMappingContent[scope.row.is_passed] }}
           </el-tag>
         </template>
       </el-table-column>
@@ -525,13 +531,13 @@ const clickReRun = () => {
 
 const getRunUrl = () => {
   const run_type = report.value.run_type
+  if (run_type == 'api'){
+    return RunApi
+  }
   if (reRunOption.value !== 'all'){
     return RunCase
   }
-  return run_type === 'task' ? RunTask
-      : run_type === 'suite' ? RunCaseSuite
-          : run_type === 'case' ? RunCase
-              : RunApi
+  return run_type === 'task' ? RunTask :  RunCase
 }
 
 const reRun = (runConf) => {

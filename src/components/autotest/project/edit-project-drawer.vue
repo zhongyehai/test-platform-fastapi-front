@@ -33,23 +33,41 @@
 
         <el-form-item
             v-if="testType==='api'"
-            :label="'swagger地址'"
-            prop="swagger"
+            :label="'接口文档类型'"
+            prop="source_type"
+            class="filter-item"
+            size="small"
+        >
+          <el-select
+              v-model="formData.source_type"
+              filterable
+              size="small"
+              style="width: 94%"
+              placeholder="当前服务的接口文档类型，用于拉取模块、接口数据"
+          >
+            <el-option v-for="item in sourceTypeList" :key="item.value" :label="item.label" :value="item.value"/>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item
+            v-if="testType==='api'"
+            :label="'接口文档地址'"
+            prop="source_type"
             class="filter-item"
             size="small"
         >
           <el-input
-              v-model="formData.swagger"
+              v-model="formData.source_addr"
               style="width: 94%"
-              placeholder="当前服务的swagger地址，用于拉取模块、接口数据"
+              placeholder="当前服务的接口文档地址，用于拉取模块、接口数据"
           />
           <el-popover class="el_popover_class" placement="top-start" trigger="hover">
             <div>
-              <div>1、此处填写对应服务获取swagger数据的地址</div>
+              <div>1、此处填写对应服务获取接口文档数据的地址</div>
               <div>
-                2、回到列表页点击同步按钮，系统会自动获取swagger数据，并把其中的模块、接口同步到测试平台，无需手动录入
+                2、回到列表页点击同步按钮，系统会自动获取拉取数据，并把其中的模块、接口同步到测试平台，无需手动录入
               </div>
-              <div>注：请输入获取swagger数据的地址，不要输入swagger-ui地址</div>
+              <div>注：请输入获取s接口文档数据的地址，不要输入页面地址</div>
             </div>
             <template #reference>
               <span style="margin-left:5px;color: #409EFF"><Help></Help></span>
@@ -240,13 +258,14 @@ const responseMessage = ref('')
 const deviceList = ref([])
 const scriptList = ref([])
 let submitButtonIsLoading = ref(false)
-
+const sourceTypeList = ref([{"label": "swagger", "value": "swagger"}, {"label": "apifox", "value": "apifox"}])
 const ruleFormRef = ref(null)
 const formData = ref({
   id: undefined,
   name: undefined,
   manager: undefined,
-  swagger: undefined,
+  source_type: undefined,
+  source_addr: undefined,
   business_id: undefined,
   app_package: undefined,
   app_activity: undefined,
@@ -279,7 +298,8 @@ const resetForm = () => {
     id: undefined,
     name: undefined,
     manager: undefined,
-    swagger: undefined,
+    source_type: undefined,
+    source_addr: undefined,
     business_id: undefined,
     app_package: undefined,
     app_activity: undefined,

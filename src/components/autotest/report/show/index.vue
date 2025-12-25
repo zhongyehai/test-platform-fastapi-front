@@ -451,13 +451,13 @@ const clickReRun = () => {
 
 const getRunUrl = () => {
   const run_type = report.value.run_type
+  if (run_type == 'api'){
+    return RunApi
+  }
   if (reRunOption.value !== 'all'){
     return RunCase
   }
-  return run_type === 'task' ? RunTask
-      : run_type === 'suite' ? RunCaseSuite
-          : run_type === 'case' ? RunCase
-              : RunApi
+  return run_type === 'task' ? RunTask :  RunCase
 }
 
 const reRun = (runConf) => {

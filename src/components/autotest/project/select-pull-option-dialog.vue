@@ -2,8 +2,13 @@
   <div>
     <el-dialog title="选择需要拉取的项" v-model="dialogIsShow" size="60%">
 
+     <div v-show="sourceType === 'apifox'" style="margin-bottom: 20px;text-align: center">
+       <label style="margin-right: 20px">请输入cookie</label>
+       <el-input v-model="apifoxCookie" type="textarea" rows="3" style="width: 90%" />
+     </div>
+
       <div style="margin-bottom: 20px">
-        从swagger拉取此服务下的模块、接口及接口的以下字段
+        从远程接口文档拉取此服务下的模块、接口及接口的以下字段
       </div>
 
       <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">全选</el-checkbox>
@@ -43,7 +48,9 @@ onBeforeUnmount(() => {
 
 const onShowDrawerEvent = (message: any) => {
   if (message.eventType === 'pull-from-swagger') {
+    console.log(message.content)
     projectId.value = message.content.id
+    sourceType.value = message.content.source_type
     checkedOptions.value = ['query', 'json', 'form', 'response']
     dialogIsShow.value = true
   }
@@ -51,6 +58,8 @@ const onShowDrawerEvent = (message: any) => {
 
 const dialogIsShow = ref(false)
 const projectId = ref()
+const sourceType = ref("")
+const apifoxCookie = ref("")
 let pullButtonIsLoading = ref(false)
 let checkAll = ref(false)
 let checkedOptions = ref(['query', 'json', 'form', 'response'])
@@ -79,7 +88,7 @@ const handleCheckedCitiesChange = (value: string | any[]) =>  {
 
 const pullBySwagger = () =>  {
   pullButtonIsLoading.value = true
-  PullFromSwagger({ project_id: projectId.value, options: checkedOptions.value }).then(response => {
+  PullFromSwagger({ project_id: projectId.value, options: checkedOptions.value, cookies: apifoxCookie }).then(response => {
     pullButtonIsLoading.value = false
     sendSuccess()
   })

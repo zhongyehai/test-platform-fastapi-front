@@ -39,6 +39,9 @@
                       'textDecoration': data.result === 'skip' ? 'line-through' : ''
                     }"
                     >
+                      <el-tag size="small" v-show="data.retry_count>0" type="warning">
+                        重跑{{ data.retry_count }}次
+                      </el-tag>
                       <span style="font-size: 12px">【{{ getTage(data) }}】<span :style="{color: getSpanColor(data)}">{{ getDuration(data) }}</span></span>
                       <span>{{ node.label }}</span>
                     </span>
