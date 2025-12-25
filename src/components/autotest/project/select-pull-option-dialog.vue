@@ -48,11 +48,11 @@ onBeforeUnmount(() => {
 
 const onShowDrawerEvent = (message: any) => {
   if (message.eventType === 'pull-from-swagger') {
-    console.log(message.content)
     projectId.value = message.content.id
     sourceType.value = message.content.source_type
     checkedOptions.value = ['query', 'json', 'form', 'response']
     dialogIsShow.value = true
+    pullButtonIsLoading.value = false
   }
 }
 
@@ -88,7 +88,7 @@ const handleCheckedCitiesChange = (value: string | any[]) =>  {
 
 const pullBySwagger = () =>  {
   pullButtonIsLoading.value = true
-  PullFromSwagger({ project_id: projectId.value, options: checkedOptions.value, cookies: apifoxCookie }).then(response => {
+  PullFromSwagger({ project_id: projectId.value, options: checkedOptions.value, cookies: apifoxCookie.value }).then(response => {
     pullButtonIsLoading.value = false
     sendSuccess()
   })
