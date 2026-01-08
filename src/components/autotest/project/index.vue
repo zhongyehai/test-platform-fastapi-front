@@ -192,6 +192,12 @@
           </template>
         </el-table-column>
 
+        <el-table-column v-if="testType === 'app'" show-overflow-tooltip align="center" label="参照设备" min-width="15%">
+          <template #default="scope">
+            <span>{{ phoneDict[scope.row.template_device] }}</span>
+          </template>
+        </el-table-column>
+
         <el-table-column show-overflow-tooltip prop="update_user" align="center" label="最后修改" min-width="10%">
           <template #default="scope">
             <span>{{ userDict[scope.row.update_user] }}</span>
@@ -248,6 +254,7 @@ import toClipboard from "@/utils/copy-to-memory";
 import {swaggerPullStatusMappingContent, swaggerPullStatusMappingTagType} from "@/components/autotest/mapping";
 import {GetBusinessList} from "@/api/config/business";
 import {ChangeProjectSort, DeleteProject, GetProjectList} from "@/api/autotest/project";
+import {GetPhoneList} from "@/api/autotest/device-phone";
 import {Help, SortThree} from "@icon-park/vue-next";
 
 const props = defineProps({
@@ -266,6 +273,7 @@ const oldIndex = ref(); // 当前拖拽项的索引
 const dragRow = ref();   // 当前拖拽的行数据
 const userList = ref([])
 const userDict = ref({})
+const phoneDict = ref({})
 const tableDataTotal = ref(0)
 const queryItems = ref({
   page_no: 1,
@@ -407,6 +415,13 @@ onMounted(() => {
   getUserList()
   getBusinessList()
   getTableDataList()
+  if (props.testType === 'app'){
+    GetPhoneList({}).then((response: {data: {data:[{id: number, name: string}]}}) => {
+       response.data.data.forEach(phone => {
+         phoneDict.value[phone.id] = phone.name
+      })
+    })
+  }
   bus.on(busEvent.drawerIsCommit, drawerIsCommit);
   setTableHeight()
   window.addEventListener('resize', handleResize);

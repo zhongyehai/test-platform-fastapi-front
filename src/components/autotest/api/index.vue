@@ -16,6 +16,15 @@
             </el-popover>
           </template>
 
+          <el-popconfirm width="250px" title="确定删除所选中的接口?" @confirm="deleteData(null)">
+            <template #reference>
+              <el-button
+                  :disabled="selectedList.length < 1"
+                  type="danger"
+                  size="small">批量删除</el-button>
+            </template>
+          </el-popconfirm>
+
           <el-table
               v-loading="tableIsLoading"
               element-loading-text="正在获取数据"
@@ -25,8 +34,11 @@
               :header-cell-style="{'text-align':'center'}"
               stripe
               row-key="id"
+              @selection-change="clickSelectAll"
               :height="tableHeight"
               @row-dblclick="rowDblclick">
+
+            <el-table-column type="selection" width="20"/>
 
             <el-table-column label="排序" width="40" align="center">
               <template #header>
@@ -237,6 +249,7 @@ const project = ref({})
 const runTrigger = 'api-index'
 const runEvent = 'select-run-env'
 const tableDataTotal = ref(0)
+const selectedList = ref([])
 const queryItems = ref({
   page_no: 1,
   page_size: 20,
@@ -257,6 +270,20 @@ const setTableHeight = () => {
 
 const handleResize = () => {
   setTableHeight();
+}
+
+const clickSelectAll = (val: never[]) => {
+  selectedList.value = val
+}
+
+const getSubmitId = (row: any) => {
+  let selectedIdList: any[] = []
+  if (row){
+    selectedIdList = [row.id]
+  }else {
+    selectedList.value.forEach(item => { selectedIdList.push(item.id) })
+  }
+  return selectedIdList
 }
 
 const rowDblclick = async (row: any, column: any, event: any) => {
@@ -308,7 +335,7 @@ const changeStatus = (row: { id: any; status: any; }) => {
 }
 
 const deleteData = (row: { id: any; }) => {
-  DeleteApi({id: row.id}).then(response => {
+  DeleteApi({id_list: getSubmitId(row)}).then(response => {
     if (response){
       getTableDataList()
     }

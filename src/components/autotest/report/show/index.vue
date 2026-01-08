@@ -43,7 +43,7 @@
 
               <el-button type="primary" size="small" @click="showPythonScript = true">Python脚本</el-button>
 
-              <el-button type="primary" size="small" @click="showReRunDialog">重跑</el-button>
+              <el-button type="primary" size="small" @click="showReRunDialog">批量重跑</el-button>
 
           <!-- 删除报告 -->
             <el-popover :visible="checkDeleteIsShow" placement="top" popper-class="down-popover" width="450px">
@@ -251,6 +251,7 @@ const props = defineProps({
 const route = useRoute()
 const reportId = route.query.id
 const report = ref({
+  id: '',
   name: '',
   create_time: '',
   project_id: undefined,
@@ -513,6 +514,10 @@ const showCaseEditor = (message: any) => {
         content: JSON.parse(JSON.stringify(response.data.case))
       })
     })
+  }else if (message.eventType === 'case-list-rerun') {
+    reRunIdList.value = message.content.reRunIdList
+    insert_to.value = report.value.id  // 默认把结果更新到当前报告下
+    getProjectAndSendEvent()
   }
 }
 

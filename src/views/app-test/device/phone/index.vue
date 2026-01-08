@@ -91,7 +91,7 @@
             </el-popconfirm>
             <el-popconfirm width="250px" :title="`确定删除【${ scope.row.name }】?`" @confirm="deleteData(scope.row)">
               <template #reference>
-                <el-button style="margin: 0; padding: 2px;color: red" type="text" size="small">删除</el-button>
+                <el-button v-show="!projectUsedPhoneId.includes(scope.row.id)" style="margin: 0; padding: 2px;color: red" type="text" size="small">删除</el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -122,12 +122,14 @@ import {ElMessage} from "element-plus";
 import toClipboard from "@/utils/copy-to-memory";
 import {GetConfigByCode} from "@/api/config/config-value";
 import {ChangePhoneSort, CopyPhone, DeletePhone, GetPhoneList} from "@/api/autotest/device-phone";
+import {GetProjectList} from "@/api/autotest/project";
 
 const phoneTableRef = ref(null)
 const tableIsLoading = ref(false)
 const oldIndex = ref(); // 当前拖拽项的索引
 const dragRow = ref();   // 当前拖拽的行数据
 const newIdList = ref([])
+const projectUsedPhoneId = ref([])
 const tableDataList = ref([])
 const tableDataTotal = ref(0)
 const queryItems = ref({
@@ -255,8 +257,17 @@ const getDeviceExtends = () => {
   }
 }
 
+const getProjectList = () => {
+  GetProjectList('app', {detail: true, page_no: 1, page_size: 99999}).then((response) => {
+    response.data.data.forEach(item => {
+      projectUsedPhoneId.value.push(item.template_device)
+    })
+  })
+}
+
 onMounted(() => {
   getTableDataList()
+  getProjectList()
   getPhoneOsMapping()
   getDeviceExtends()
   bus.on(busEvent.drawerIsCommit, drawerIsCommit);

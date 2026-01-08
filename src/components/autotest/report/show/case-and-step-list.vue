@@ -45,9 +45,21 @@
                       <span style="font-size: 12px">【{{ getTage(data) }}】<span :style="{color: getSpanColor(data)}">{{ getDuration(data) }}</span></span>
                       <span>{{ node.label }}</span>
                     </span>
-                      <span v-show="data.id === currentNode.id && data.suite_id && data.result !== 'waite'">
+                    <span v-show="data.id === currentNode.id && data.result !== 'waite'">
+                      <!-- 用例集-->
+                      <span v-show="!data.suite_id && !data.report_case_id">
+                        <el-button type="primary" @click.stop="reRun(data, 'all')" style="margin-right: 5px">重跑全部</el-button>
+                        <el-button type="primary" @click.stop="reRun(data, 'failed')" style="margin-right: 5px;margin-left: 0">重跑失败的</el-button>
+                        <el-button type="primary" @click.stop="reRun(data, 'success')" style="margin: 0">重跑成功的</el-button>
+                      </span>
+
+                      <!-- 用例 -->
+                      <span v-show="data.suite_id && !data.report_case_id">
+                        <el-button type="primary" @click.stop="reRun(data)" style="margin-right: 5px; padding: 4px">重跑</el-button>
                         <el-button type="primary" @click.stop="showCaseEditor(data)" style="margin: 0; padding: 4px">编辑</el-button>
+                      </span>
                     </span>
+
                   </div>
                 </template>
               </el-tree>
@@ -409,6 +421,30 @@ const showCaseEditor = (row: { case_id: any; }) => {
       caseId: row.case_id
     },
   })
+}
+
+const reRun = (row: { id: undefined, case_id: undefined, suite_id: undefined, children:[{case_id: undefined, result: string}]}, option: string) => {
+  const reRunIdList: undefined[] = []
+  if (row.suite_id) { // 用例，只重跑当前
+    reRunIdList.push(row.case_id)
+  }else { // 用例集，重跑当前用例集下的所有用例
+    row.children.forEach(child => {
+      if (option === 'all' || option === 'failed' && ['fail', 'error'].includes(child.result) || option === 'success' && child.result === 'success') {
+        reRunIdList.push(child.case_id)
+      }
+    })
+  }
+
+  if (reRunIdList.length > 0) {
+    bus.emit(busEvent.drawerIsShow, {
+      eventType: 'case-list-rerun',
+      content: {
+        reRunIdList: reRunIdList
+      },
+    })
+  }else {
+    ElMessage.error('当前用例集下没有符合要求的用例')
+  }
 }
 
 onMounted(() => {
