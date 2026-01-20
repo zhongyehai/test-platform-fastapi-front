@@ -4,7 +4,7 @@
 
      <div v-show="sourceType === 'apifox'" style="margin-bottom: 20px;text-align: center">
        <label style="margin-right: 20px">请输入cookie</label>
-       <el-input v-model="apifoxCookie" type="textarea" rows="3" style="width: 90%" />
+       <el-input v-model="apifoxCookie" type="textarea" rows="3" style="width: 90%"  placeholder="请输入Apifox Cookie"/>
      </div>
 
       <div style="margin-bottom: 20px">
@@ -37,6 +37,7 @@
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import {bus, busEvent} from "@/utils/bus-events";
 import { PullFromSwagger } from '@/api/assist/swagger'
+import {ElMessage} from "element-plus";
 
 onMounted(() => {
   bus.on(busEvent.drawerIsShow, onShowDrawerEvent);
@@ -87,6 +88,10 @@ const handleCheckedCitiesChange = (value: string | any[]) =>  {
 }
 
 const pullBySwagger = () =>  {
+  if (sourceType.value === 'apifox' && !apifoxCookie.value){
+    ElMessage.warning('请输入apifox的cookie')
+    return
+  }
   pullButtonIsLoading.value = true
   PullFromSwagger({ project_id: projectId.value, options: checkedOptions.value, cookies: apifoxCookie.value }).then(response => {
     pullButtonIsLoading.value = false

@@ -60,9 +60,7 @@
               v-model="formData.source_addr"
               style="width: 94%"
               :placeholder="`当前服务的接口文档地址，用于拉取模块、接口数据，如：${
-                formData.source_type === 'apifox'
-                ? 'https://api.apifox.com/api/v1/projects/{project_id}/api-tree-list?locale=zh-CN'
-                : 'http://localhost:8080/api/openapi.json'
+                formData.source_type === 'apifox' ? 'https://app.apifox.com/project/{project_id}' : 'http://localhost:8080/api/openapi.json'
               }`"
           />
           <el-popover class="el_popover_class" placement="top-start" trigger="hover">
