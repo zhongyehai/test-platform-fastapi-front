@@ -7,6 +7,7 @@
       :close-on-click-modal="false"
       width="75%"
   >
+    {{ skipOnFail }}
     <div v-show="runName" style="text-align: center; margin-bottom: 20px" class="el-collapse-item-title">
       运行【{{ runName }}】
     </div>
@@ -140,6 +141,32 @@
             </label>
             <div style="margin-top: 10px">
               <el-radio v-for="(value, key) in runModeData" :key="key" v-model="runType" :label="key">{{ value }}</el-radio>
+            </div>
+          </div>
+        </el-collapse-item>
+
+        <!-- 选择执行模式 -->
+        <el-collapse-item name="selectSkipOnFail">
+          <template #title>
+            <div class="el-collapse-item-title"> 选择失败时是否跳过: </div>
+          </template>
+          <div style="margin-left: 20px">
+            <label>
+              <span style="color: red">
+                串行执行: 用例一条一条顺序串行执行 <br>
+                并行执行: 每条用例一个线程并行执行 <br>
+                注：并行执行仅仅是为了提升执行效率，请勿用于压力测试<br>
+              </span>
+            </label>
+            <div style="margin-top: 10px">
+              <el-radio
+                  v-model="skipOnFail"
+                  v-for="item in skipOnFailItem"
+                  :key="item.value"
+                  :label="item.value"
+              >
+                {{ item.label }}
+              </el-radio>
             </div>
           </div>
         </el-collapse-item>
@@ -283,6 +310,7 @@ const runServer = ref(undefined)
 const runPhone = ref(undefined)
 const noReset = ref(true)
 const runModeData = ref(undefined)
+const skipOnFailItem = [{ label: '跳过后续用例执行', value: 1 }, { label: '继续后续用例执行', value: 0 }]
 const runEnvCheckboxRef = ref(null)
 const skipIfViewRef = ref(null)
 const editVariablesRef = ref(null)
@@ -304,6 +332,7 @@ const runServerList = ref([])
 const runPhoneList = ref([])
 const envScrollHeight = ref('10px')
 const runName = ref("")
+const skipOnFail = ref(0)
 
 const setTableHeight = () => {
   if (window.innerHeight < 800){  // 小屏
@@ -334,6 +363,7 @@ const onDrawerIsShow = (message) => {
     triggerFrom.value = message.triggerFrom
     showSelectRunModel.value =  message.showSelectRunModel
     runName.value = message.runName ? message.runName : ""
+    skipOnFail.value = message.skipOnFail ? message.skipOnFail : 0
 
     // 设置执行环境
     if (props.testType === 'api') {
@@ -407,6 +437,7 @@ const runData = () =>  {
       runPhone: runPhone.value,
       runType: parseInt(runType.value),
       noReset: noReset.value,
+      skipOnFail: skipOnFail.value,
       temp_variables: temp_variables
     }
 

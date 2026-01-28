@@ -402,6 +402,7 @@ const runCase = (runConf) => {
     server_id: runConf.runServer,
     phone_id: runConf.runPhone,
     no_reset: runConf.noReset,
+    skip_on_fail: runConf.skipOnFail,
     temp_variables: runConf.temp_variables,
     'trigger_type': 'page'
   }).then(response => {

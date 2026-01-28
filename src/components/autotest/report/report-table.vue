@@ -190,17 +190,18 @@
           label="操作"
           width="150">
         <template #default="scope">
-<!--          <el-popconfirm title="确定把此报告的运行结果通知到对应任务的报告接收人吗？" @confirm="notifyReport(scope.row)">-->
-<!--            <template #reference>-->
-<!--              <el-button-->
-<!--                  v-show="scope.row.process === 3 && scope.row.status === 2 && scope.row.run_type === 'task' && scope.row.notified === false"-->
-<!--                  type="text"-->
-<!--                  size="small"-->
-<!--                  style="margin: 0; padding: 2px"-->
-<!--              >通知-->
-<!--              </el-button>-->
-<!--            </template>-->
-<!--          </el-popconfirm>-->
+
+          <el-popconfirm :title="`停止【${ scope.row.name }】的测试执行?`" @confirm="changeReportStepStatus(scope.row)">
+            <template #reference>
+              <el-button
+                  v-show="!(scope.row.process === 3 && scope.row.status === 2)"
+                  style="margin: 0; padding: 2px;color: red"
+                  type="text"
+                  size="small"
+              >停止
+              </el-button>
+            </template>
+          </el-popconfirm>
 
           <el-button
               v-show="scope.row.process === 3 && scope.row.status === 2 && scope.row.run_type === 'task' && scope.row.notified === false"
@@ -335,7 +336,7 @@ import {
   DeleteReport,
   GetReport,
   GetReportRerunCaseList,
-  GetReportList, NotifyReport
+  GetReportList, NotifyReport, ChangeReportStepStatus
 } from "@/api/autotest/report";
 import {reportStatusMappingContent, reportStatusMappingTagType, reportTriggerTypeMappingContent} from "../mapping";
 import {GetRunEnvList} from "@/api/config/run-env";
@@ -488,6 +489,12 @@ const notifyReport = () => {
   NotifyReport(props.testType, {id: report.value.id, notify_to: notifyTo.value}).then(response => {
     notifyIsLoading.value = false
     notifyDialogIsShow.value = false
+    getTableDataList()
+  })
+}
+
+const changeReportStepStatus = (row: { id: any; }) => {
+  ChangeReportStepStatus(props.testType, {report_id: row.id, status: 'stop'}).then(response => {
     getTableDataList()
   })
 }

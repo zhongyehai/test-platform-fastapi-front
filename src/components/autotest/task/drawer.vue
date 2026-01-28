@@ -234,6 +234,17 @@
               </el-tooltip>
             </el-form-item>
 
+            <el-form-item prop="skip_on_fail" label="有用例失败时" size="small" class="is-required">
+              <el-radio
+                  v-model="formData.skip_on_fail"
+                  v-for="item in skipOnFailItem"
+                  :key="item.value"
+                  :label="item.value"
+              >
+                {{ item.label }}
+              </el-radio>
+            </el-form-item>
+
             <el-form-item prop="is_async" label="运行机制" size="small" class="is-required">
               <el-radio v-model="formData.is_async" v-for="(value, key) in runModeData" :key="parseInt(key)" :label="parseInt(key)">
                 {{ value }}
@@ -489,6 +500,7 @@ const runBrowserNameDict = ref({})
 const pushHitTypeDict = {0: '不记录', 1: '记录'}
 const project = ref()
 const skipHolidayItem = [{ label: '跳过执行', value: 1 }, { label: '不跳过执行', value: 0 }]
+const skipOnFailItem = [{ label: '跳过后续用例执行', value: 1 }, { label: '继续后续用例执行', value: 0 }]
 const emailToInputRef = ref(null)
 const callBackEditorViewRef = ref(null)
 const caseSelectorRef = ref(null)
@@ -497,7 +509,8 @@ const formData = ref({
   id: undefined,
   project_id: undefined,
   name: undefined,
-  skip_holiday: 1,
+  skip_holiday: 0,
+  skip_on_fail: false,
   cron: '0 15 10 ? * MON-FRI',
   is_send: 'not_send',
   is_async: 0,
@@ -586,7 +599,8 @@ const resetForm = () => {
     id: undefined,
     project_id: undefined,
     name: undefined,
-    skip_holiday: 1,
+    skip_holiday: 0,
+    skip_on_fail: false,
     cron: '0 15 10 ? * MON-FRI',
     is_send: 'not_send',
     is_async: 0,
@@ -696,6 +710,7 @@ const clickRun = () =>{
     triggerFrom: triggerFrom,
     showSelectRunModel: true,
     runName: formData.value.name,
+    skipOnFail: formData.value.skip_on_fail,
     business_id: project.value.business_id,
     runArgs: undefined
   })
@@ -710,6 +725,7 @@ const runTask = (runConf) => {
     server_id: runConf.runServer,
     phone_id: runConf.runPhone,
     no_reset: runConf.noReset,
+    skip_on_fail: runConf.skipOnFail,
     temp_variables: runConf.temp_variables,
     'trigger_type': 'page'
   }).then(response => {

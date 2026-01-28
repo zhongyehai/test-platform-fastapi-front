@@ -391,6 +391,7 @@ const clickRun = (row) => {
     triggerFrom: triggerFrom,
     showSelectRunModel: true,
     runName: row.name,
+    skipOnFail: row.skip_on_fail,
     business_id: project.value.business_id,
     runArgs: undefined,
     runEnv: row.env_list[0] // 默认选择任务设置的第一个环境
@@ -406,6 +407,7 @@ const runTask = (runConf) => {
     server_id: runConf.runServer,
     phone_id: runConf.runPhone,
     no_reset: runConf.noReset,
+    skip_on_fail: runConf.skipOnFail,
     temp_variables: runConf.temp_variables,
     'trigger_type': 'page'
   }).then(response => {
