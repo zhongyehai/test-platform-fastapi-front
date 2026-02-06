@@ -2,6 +2,12 @@
   <div>
     <el-drawer v-model="drawerIsShow" title="新增元素" size="90%">
 
+      <div v-show="testType === 'ui'" style="margin-left: 20px; margin-bottom: 20px">
+        <span style="color: red">
+          注：ui执行框架是playwright，定位方式见：<a href="https://playwright.dev/python/docs/locators">playwright官网</a>
+        </span>
+      </div>
+
       <el-table ref="dataTable" :data="formData.element_list" stripe size="small" row-key="id">
 
         <el-table-column label="排序" width="40" align="center">
@@ -80,7 +86,8 @@
                 :rows="1"
                 :placeholder="
                   scope.row.by === 'bounds' ? '如元素坐标范围为[918,1079][1080,1205]，则填写: [[918,1079], [1080,1205]]' :
-                  scope.row.by === 'coordinate' ? '请填写具体坐标: (x, y)' : '元素表达式'
+                  scope.row.by === 'coordinate' ? '请填写具体坐标: (x, y)' :
+                  scope.row.by === 'role' ? '请直接填写表达式，如：button,name=账号' : '元素表达式'
                 "
             />
           </template>

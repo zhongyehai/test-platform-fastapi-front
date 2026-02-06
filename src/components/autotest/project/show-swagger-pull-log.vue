@@ -102,7 +102,6 @@ import {swaggerPullStatusMappingContent, swaggerPullStatusMappingTagType} from "
 import Pagination from "@/components/pagination.vue";
 import toClipboard from "@/utils/copy-to-memory";
 import {ElMessage} from "element-plus";
-import {getFindElementOption} from "@/utils/get-config";
 import {paramsISOTime} from "@/utils/parse-data";
 
 const props = defineProps({

@@ -7,7 +7,6 @@
       :close-on-click-modal="false"
       width="75%"
   >
-    {{ skipOnFail }}
     <div v-show="runName" style="text-align: center; margin-bottom: 20px" class="el-collapse-item-title">
       运行【{{ runName }}】
     </div>

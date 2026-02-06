@@ -125,7 +125,6 @@ import {ElMessage} from 'element-plus'
 import {Clear, Copy, Minus, Plus} from "@icon-park/vue-next";
 import {bus, busEvent} from "@/utils/bus-events";
 import {PostTodo, GetTodo} from "@/api/manage/todo";
-import {getFindElementOption} from "@/utils/get-config";
 
 
 onMounted(() => {

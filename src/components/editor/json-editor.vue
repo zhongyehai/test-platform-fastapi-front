@@ -81,9 +81,6 @@ import {VAceEditor} from "vue3-ace-editor";
 import 'ace-builds/src-noconflict/mode-json5';
 import 'ace-builds/src-noconflict/theme-chrome';
 import {ElMessage} from "element-plus";
-import {getFindElementOption} from "@/utils/get-config";
-import {bus, busEvent} from "@/utils/bus-events";
-import {Help} from "@icon-park/vue-next";
 import toClipboard from "@/utils/copy-to-memory";
 
 const aceConfig = reactive({

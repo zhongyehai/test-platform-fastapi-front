@@ -148,7 +148,6 @@ import {GetProjectEnv, PutProjectEnv} from "@/api/autotest/project";
 import {GetRunEnvList} from "@/api/config/run-env";
 import {ElMessage, ElTree} from "element-plus";
 import {Help} from "@icon-park/vue-next";
-import {getFindElementOption} from "@/utils/get-config";
 
 const props = defineProps({
   testType: {

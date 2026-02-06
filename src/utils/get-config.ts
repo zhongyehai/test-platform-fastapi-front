@@ -15,19 +15,17 @@ export function getRunTimeout() {
 
 // 获取ui自动化元素定位方式
 export function getFindElementOption(testType: any) {
-    if (busEvent.data.findElementOptionList.length < 1){
-        let findElementOption: [] = []
-        GetFindElementBy({ 'test_type': testType }).then(response => {
-            findElementOption = response.data
-            busEvent.data.findElementOptionList = findElementOption
-            // 列表解析为字典
-            const optionDict = {}
-            findElementOption.forEach(option => {
-                optionDict[option.value] = option.label
-            })
-            busEvent.data.findElementOptionDict = optionDict
+    let findElementOption: [] = []
+    GetFindElementBy({ 'test_type': testType }).then(response => {
+        findElementOption = response.data
+        busEvent.data.findElementOptionList = findElementOption
+        // 列表解析为字典
+        const optionDict = {}
+        findElementOption.forEach(option => {
+            optionDict[option.value] = option.label
         })
-    }
+        busEvent.data.findElementOptionDict = optionDict
+    })
 }
 
 // // 获取ui自动化数据提取类型
